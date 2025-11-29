@@ -10,16 +10,16 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const letters = "PORTFOLIO".split("");
 
   useEffect(() => {
-    // Alternate between black and white every 200ms
+    // Alternate between black and white every 400ms (slower)
     const interval = setInterval(() => {
       setShowWhite(prev => !prev);
-    }, 200);
+    }, 400);
 
-    // Complete animation after 3.5 seconds
+    // Complete animation after 5 seconds (longer)
     const timeout = setTimeout(() => {
       clearInterval(interval);
       onComplete();
-    }, 3500);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
@@ -55,11 +55,11 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               rotateX: 0,
             }}
             transition={{
-              delay: index * 0.15,
-              duration: 0.6,
+              delay: index * 0.2,
+              duration: 0.8,
               type: "spring",
-              stiffness: 100,
-              damping: 10,
+              stiffness: 80,
+              damping: 12,
             }}
             className="text-4xl md:text-7xl font-bold"
             style={{

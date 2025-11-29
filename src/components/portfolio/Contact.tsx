@@ -1,7 +1,11 @@
 import { Mail, Linkedin, Github, Twitter, Phone, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingForm } from "./BookingForm";
+import { useState } from "react";
 
 export const Contact = () => {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <section id="contact" className="py-32 px-6">
       <div className="max-w-4xl mx-auto text-center space-y-12">
@@ -18,25 +22,42 @@ export const Contact = () => {
         </div>
 
         <div className="space-y-8">
-          {/* Contact methods */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-            >
-              <Mail className="w-5 h-5 mr-3" />
-              Get In Touch
-            </Button>
-            
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-            >
-              <Calendar className="w-5 h-5 mr-3" />
-              Book a Call
-            </Button>
-          </div>
+          {!showForm ? (
+            <>
+              {/* Contact methods */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button 
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => setShowForm(true)}
+                >
+                  <Mail className="w-5 h-5 mr-3" />
+                  Get In Touch
+                </Button>
+                
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => setShowForm(true)}
+                >
+                  <Calendar className="w-5 h-5 mr-3" />
+                  Book a Call
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="space-y-6">
+              <Button
+                variant="outline"
+                onClick={() => setShowForm(false)}
+                className="mb-4"
+              >
+                ← Back
+              </Button>
+              <BookingForm />
+            </div>
+          )}
 
           {/* Phone number */}
           <div className="flex items-center justify-center gap-3 text-muted-foreground">
@@ -78,7 +99,7 @@ export const Contact = () => {
         {/* Footer */}
         <div className="pt-20 text-muted-foreground">
           <p className="text-sm">
-            © 2024 Vijay. Designed & Built with passion.
+            © 2024 Ashwin. Designed & Built with passion.
           </p>
           <p className="text-xs mt-2">
             Inspired by the simplicity and innovation of Steve Jobs
