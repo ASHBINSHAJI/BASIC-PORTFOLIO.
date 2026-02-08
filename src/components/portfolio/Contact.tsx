@@ -11,9 +11,9 @@ export const Contact = () => {
       <div className="max-w-4xl mx-auto text-center space-y-12">
         <div className="space-y-6">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
-            Let's Build Something
+            <span className="liquid-glass-subtle">Let's Build Something</span>
             <br />
-            <span className="text-accent">Amazing Together</span>
+            <span className="liquid-glass">Amazing Together</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Whether you have a project in mind or just want to chat about technology,
