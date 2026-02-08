@@ -66,7 +66,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Ashwin <onboarding@resend.dev>",
+        from: "Ashbin <onboarding@resend.dev>",
         to: [email],
         subject: "Booking Confirmation - We received your request!",
         html: `
@@ -84,7 +84,7 @@ const handler = async (req: Request): Promise<Response> => {
             <p>I'll get back to you as soon as possible to confirm your booking.</p>
             <p style="color: #666; font-size: 14px; margin-top: 30px;">
               Best regards,<br>
-              Ashwin
+              Ashbin
             </p>
           </div>
         `,

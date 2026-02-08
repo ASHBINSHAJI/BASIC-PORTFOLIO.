@@ -99,7 +99,7 @@ export const Contact = () => {
         {/* Footer */}
         <div className="pt-20 text-muted-foreground">
           <p className="text-sm">
-            © 2024 Ashwin. Designed & Built with passion.
+            © 2024 Ashbin. Designed & Built with passion.
           </p>
           <p className="text-xs mt-2">
             Inspired by the simplicity and innovation of Steve Jobs
