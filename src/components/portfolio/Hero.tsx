@@ -24,7 +24,7 @@ export const Hero = () => {
           className="text-7xl md:text-9xl font-bold tracking-tighter animate-fade-in-up opacity-0"
           style={{ animationDelay: "0.3s" }}
         >
-          Ashwin
+          Ashbin
         </h1>
 
         {/* Title */}
