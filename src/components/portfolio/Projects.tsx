@@ -28,7 +28,7 @@ export const Projects = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-            Featured Projects
+            <span className="liquid-glass-subtle">Featured Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A selection of my recent work combining development, design, and innovation

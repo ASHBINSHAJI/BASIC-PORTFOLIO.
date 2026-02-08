@@ -124,7 +124,79 @@ All colors MUST be HSL.
   .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
   }
-  
+
+  .liquid-glass {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--accent) / 0.15) 0%,
+      hsl(var(--accent) / 0.05) 25%,
+      hsl(var(--foreground) / 0.03) 50%,
+      hsl(var(--accent) / 0.08) 75%,
+      hsl(var(--accent) / 0.18) 100%
+    );
+    background-size: 200% 200%;
+    animation: liquid-shift 6s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px hsl(var(--accent) / 0.3));
+  }
+
+  .liquid-glass-subtle {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(
+      120deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--accent) / 0.9) 30%,
+      hsl(var(--foreground)) 50%,
+      hsl(var(--accent) / 0.8) 70%,
+      hsl(var(--foreground)) 100%
+    );
+    background-size: 300% 100%;
+    animation: liquid-shimmer 5s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 4px hsl(var(--accent) / 0.2));
+  }
+
+  .liquid-glass-card {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--accent) / 0.08),
+      hsl(var(--background) / 0.6),
+      hsl(var(--accent) / 0.05)
+    );
+    border: 1px solid hsl(var(--accent) / 0.15);
+    box-shadow: 
+      0 8px 32px hsl(var(--accent) / 0.1),
+      inset 0 1px 0 hsl(var(--accent) / 0.1),
+      inset 0 -1px 0 hsl(var(--foreground) / 0.05);
+  }
+
+  @keyframes liquid-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes liquid-shimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
   @keyframes fade-in-up {
     from {
       opacity: 0;

@@ -8,7 +8,7 @@ export const About = () => {
           {/* Left content */}
           <div className="space-y-6">
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
-              About Me
+              <span className="liquid-glass-subtle">About Me</span>
             </h2>
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
