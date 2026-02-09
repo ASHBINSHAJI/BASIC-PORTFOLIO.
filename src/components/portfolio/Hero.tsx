@@ -61,7 +61,7 @@ export const Hero = () => {
             MERN Stack Developer
           </p>
           <p className="text-xl md:text-2xl text-muted-foreground">
-            Founder of <span className="text-accent font-semibold">AIRNEST</span>
+            Founder of <span className="text-accent font-semibold">Airnext</span> · <span className="text-accent font-semibold">E-onit</span> · <span className="text-accent font-semibold">The Heaven Studio</span>
           </p>
         </div>
 

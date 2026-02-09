@@ -9,12 +9,16 @@ export const Skills = () => {
       skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs"],
     },
     {
-      title: "Creative",
-      skills: ["After Effects", "Premiere Pro", "Motion Graphics", "UI/UX Design"],
+      title: "Creative & Animation",
+      skills: ["Blender", "After Effects", "Premiere Pro", "Motion Graphics", "UI/UX Design"],
     },
     {
       title: "AI & Tools",
-      skills: ["AI Automation", "ChatGPT", "Zapier", "Make.com", "Git"],
+      skills: ["Gemini", "AI Automation", "ChatGPT", "Zapier", "Make.com", "Git"],
+    },
+    {
+      title: "Robotics R&D & IoT",
+      skills: ["Arduino", "Raspberry Pi", "ROS", "Sensor Integration", "PCB Design", "MQTT"],
     },
   ];
 
@@ -30,7 +34,7 @@ export const Skills = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, idx) => (
             <div
               key={category.title}
