@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export const Hero = () => {
   const scrollToContact = () => {
@@ -21,10 +22,34 @@ export const Hero = () => {
 
         {/* Name */}
         <h1 
-          className="text-7xl md:text-9xl font-bold tracking-tighter animate-fade-in-up opacity-0"
+          className="text-7xl md:text-9xl font-bold tracking-tighter animate-fade-in-up opacity-0 relative"
           style={{ animationDelay: "0.3s" }}
         >
-          <span className="liquid-glass">Ashbin</span>
+          <span className="viscous-text">
+            {"Ashbin".split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                className="viscous-letter"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  filter: [
+                    "drop-shadow(0 0 8px rgba(0,0,0,0.4))",
+                    "drop-shadow(0 0 16px rgba(255,255,255,0.6))",
+                    "drop-shadow(0 0 8px rgba(0,0,0,0.4))",
+                  ],
+                  scale: [1, 1.02, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3,
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </span>
         </h1>
 
         {/* Title */}
