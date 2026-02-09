@@ -125,6 +125,80 @@ All colors MUST be HSL.
     animation: fade-in 0.6s ease-out forwards;
   }
 
+  .viscous-text {
+    display: inline-flex;
+    gap: 0;
+    position: relative;
+  }
+
+  .viscous-letter {
+    display: inline-block;
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 5%) 0%,
+      hsl(0 0% 95%) 20%,
+      hsl(0 0% 10%) 40%,
+      hsl(0 0% 90%) 60%,
+      hsl(0 0% 5%) 80%,
+      hsl(0 0% 85%) 100%
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: viscous-flow 6s ease-in-out infinite;
+    position: relative;
+  }
+
+  .viscous-letter::after {
+    content: attr(data-letter);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100% / 0.3) 0%,
+      transparent 40%,
+      hsl(0 0% 0% / 0.2) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    mix-blend-mode: overlay;
+  }
+
+  .dark .viscous-letter {
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 95%) 0%,
+      hsl(0 0% 15%) 20%,
+      hsl(0 0% 90%) 40%,
+      hsl(0 0% 20%) 60%,
+      hsl(0 0% 95%) 80%,
+      hsl(0 0% 25%) 100%
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: viscous-flow 6s ease-in-out infinite;
+  }
+
+  @keyframes viscous-flow {
+    0%, 100% {
+      background-position: 0% 25%;
+    }
+    25% {
+      background-position: 50% 75%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 25% 0%;
+    }
+  }
+
+
   .liquid-glass {
     position: relative;
     display: inline-block;
