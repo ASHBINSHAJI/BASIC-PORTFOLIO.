@@ -10,15 +10,15 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const letters = "PORTFOLIO".split("");
 
   useEffect(() => {
-    // Cycle through phases for the cutting effect
+    // Cycle through phases — slower rhythm
     const interval = setInterval(() => {
       setPhase(prev => (prev + 1) % 4);
-    }, 500);
+    }, 800);
 
     const timeout = setTimeout(() => {
       clearInterval(interval);
       onComplete();
-    }, 5000);
+    }, 6000);
 
     return () => {
       clearInterval(interval);
@@ -41,7 +41,7 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         animate={{
           x: isEvenPhase ? "0%" : "-100%",
         }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         className="absolute top-0 left-0 w-1/2 h-full"
         style={{
           background: isSwapped
@@ -55,7 +55,7 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         animate={{
           x: isEvenPhase ? "0%" : "100%",
         }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         className="absolute top-0 right-0 w-1/2 h-full"
         style={{
           background: isSwapped
@@ -69,7 +69,7 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         animate={{
           x: isEvenPhase ? "-100%" : "0%",
         }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         className="absolute top-0 left-0 w-1/2 h-full"
         style={{
           background: isSwapped
@@ -82,7 +82,7 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         animate={{
           x: isEvenPhase ? "100%" : "0%",
         }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         className="absolute top-0 right-0 w-1/2 h-full"
         style={{
           background: isSwapped
