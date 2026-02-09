@@ -6,16 +6,15 @@ interface IntroAnimationProps {
 }
 
 export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
-  const [showWhite, setShowWhite] = useState(true);
+  const [phase, setPhase] = useState(0);
   const letters = "PORTFOLIO".split("");
 
   useEffect(() => {
-    // Alternate between black and white every 400ms (slower)
+    // Cycle through phases for the cutting effect
     const interval = setInterval(() => {
-      setShowWhite(prev => !prev);
-    }, 400);
+      setPhase(prev => (prev + 1) % 4);
+    }, 500);
 
-    // Complete animation after 5 seconds (longer)
     const timeout = setTimeout(() => {
       clearInterval(interval);
       onComplete();
@@ -27,20 +26,69 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     };
   }, [onComplete]);
 
+  // Determine panel positions based on phase
+  // Phase 0: Black left, White right (closed)
+  // Phase 1: Both split outward
+  // Phase 2: White left, Black right (closed)
+  // Phase 3: Both split outward again
+  const isEvenPhase = phase % 2 === 0;
+  const isSwapped = phase >= 2;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
-      {/* Parallel split effect */}
+      {/* Left side - black panel approaching from left */}
       <motion.div
-        initial={{ x: 0 }}
-        animate={{ x: showWhite ? 0 : "-100%" }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="absolute inset-0 w-1/2 bg-background"
+        animate={{
+          x: isEvenPhase ? "0%" : "-100%",
+        }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        className="absolute top-0 left-0 w-1/2 h-full"
+        style={{
+          background: isSwapped
+            ? "hsl(0 0% 100%)"
+            : "hsl(0 0% 5%)",
+        }}
       />
+
+      {/* Right side - black panel approaching from right */}
       <motion.div
-        initial={{ x: 0 }}
-        animate={{ x: showWhite ? "100%" : 0 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="absolute inset-0 left-1/2 w-1/2 bg-foreground"
+        animate={{
+          x: isEvenPhase ? "0%" : "100%",
+        }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        className="absolute top-0 right-0 w-1/2 h-full"
+        style={{
+          background: isSwapped
+            ? "hsl(0 0% 5%)"
+            : "hsl(0 0% 100%)",
+        }}
+      />
+
+      {/* Second layer - panels that appear when first ones split */}
+      <motion.div
+        animate={{
+          x: isEvenPhase ? "-100%" : "0%",
+        }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        className="absolute top-0 left-0 w-1/2 h-full"
+        style={{
+          background: isSwapped
+            ? "hsl(0 0% 5%)"
+            : "hsl(0 0% 100%)",
+        }}
+      />
+
+      <motion.div
+        animate={{
+          x: isEvenPhase ? "100%" : "0%",
+        }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        className="absolute top-0 right-0 w-1/2 h-full"
+        style={{
+          background: isSwapped
+            ? "hsl(0 0% 100%)"
+            : "hsl(0 0% 5%)",
+        }}
       />
 
       {/* Falling letters */}
@@ -49,9 +97,9 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           <motion.div
             key={index}
             initial={{ y: -200, opacity: 0, rotateX: -90 }}
-            animate={{ 
-              y: 0, 
-              opacity: 1, 
+            animate={{
+              y: 0,
+              opacity: 1,
               rotateX: 0,
             }}
             transition={{
@@ -63,10 +111,13 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             }}
             className="text-4xl md:text-7xl font-bold"
             style={{
-              color: showWhite ? "hsl(var(--foreground))" : "hsl(var(--background))",
-              textShadow: showWhite 
-                ? "0 4px 12px rgba(0,0,0,0.3)" 
+              color: isEvenPhase
+                ? isSwapped ? "hsl(0 0% 5%)" : "hsl(0 0% 100%)"
+                : isSwapped ? "hsl(0 0% 100%)" : "hsl(0 0% 5%)",
+              textShadow: isEvenPhase
+                ? "0 4px 12px rgba(0,0,0,0.3)"
                 : "0 4px 12px rgba(255,255,255,0.3)",
+              transition: "color 0.3s ease, text-shadow 0.3s ease",
             }}
           >
             {letter}
