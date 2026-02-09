@@ -25,7 +25,7 @@ export const Projects = () => {
         "Your imagination deployed as reality. Focused on virtual ads, animated web experiences, and next-level editing that turns creative visions into stunning digital content.",
       tags: ["Animation", "Web", "Creative", "Ads"],
       gradient: "from-violet-500/20 to-fuchsia-500/20",
-      comingSoon: false,
+      comingSoon: true,
     },
     {
       title: "Endeavar Fitness AI",
