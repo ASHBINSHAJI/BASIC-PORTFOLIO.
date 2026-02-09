@@ -16,8 +16,8 @@ export const About = () => {
                 believes in the power of technology to transform ideas into reality.
               </p>
               <p>
-                As the founder of <span className="text-accent font-semibold">AIRNEST</span>, I'm building 
-                innovative solutions that combine cutting-edge development with intelligent automation.
+                As the founder of <span className="text-accent font-semibold">Airnext</span>, <span className="text-accent font-semibold">E-onit</span>, and <span className="text-accent font-semibold">The Heaven Studio</span>, I'm building 
+                innovative solutions across smart home automation, humanoid robotics, and creative digital experiences.
               </p>
               <p>
                 Inspired by Steve Jobs' philosophy of simplicity and innovation, I strive to create 

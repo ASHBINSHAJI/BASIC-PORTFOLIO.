@@ -1,25 +1,39 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Projects = () => {
   const projects = [
     {
-      title: "AIRNEST Platform",
-      description: "A comprehensive AI automation platform that streamlines business workflows and enhances productivity through intelligent automation.",
-      tags: ["React", "Node.js", "AI", "Automation"],
-      gradient: "from-blue-500/20 to-cyan-500/20",
+      title: "Airnext",
+      description:
+        "Smart home innovation reimagined. If smooth and quality had a definition, it's Airnext — automating your home beyond imagination with solutions that actually work.",
+      tags: ["IoT", "AI", "Smart Home", "Automation"],
+      gradient: "from-cyan-500/20 to-blue-600/20",
+      comingSoon: true,
     },
     {
-      title: "Motion Portfolio",
-      description: "An animated portfolio showcase featuring cutting-edge motion graphics and interactive elements built with modern web technologies.",
-      tags: ["React", "Framer Motion", "Three.js"],
-      gradient: "from-purple-500/20 to-pink-500/20",
+      title: "E-onit",
+      description:
+        "Project H2S — combining hearing, sensation, and stability into one. A humanoid robotics platform merging physical and mental computing with a fresh outlayer technology.",
+      tags: ["Robotics", "AI", "Hardware", "R&D"],
+      gradient: "from-rose-500/20 to-orange-500/20",
+      comingSoon: true,
     },
     {
-      title: "Full-Stack E-Commerce",
-      description: "A complete e-commerce solution with secure payments, real-time inventory, and an intuitive admin dashboard built on MERN stack.",
-      tags: ["MERN", "Stripe", "MongoDB"],
-      gradient: "from-green-500/20 to-emerald-500/20",
+      title: "The Heaven Studio",
+      description:
+        "Your imagination deployed as reality. Focused on virtual ads, animated web experiences, and next-level editing that turns creative visions into stunning digital content.",
+      tags: ["Animation", "Web", "Creative", "Ads"],
+      gradient: "from-violet-500/20 to-fuchsia-500/20",
+      comingSoon: false,
+    },
+    {
+      title: "Endeavar Fitness AI",
+      description:
+        "All-in-one fitness platform with superfast 30-min delivery. Meet Evar — your AI companion that helps, heals, and follows you with end-to-end encryption. Free SaaS tier available.",
+      tags: ["AI", "Fitness", "SaaS", "Robotics"],
+      gradient: "from-blue-600/20 to-slate-900/20",
+      comingSoon: true,
     },
   ];
 
@@ -31,21 +45,33 @@ export const Projects = () => {
             <span className="liquid-glass-subtle">Featured Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A selection of my recent work combining development, design, and innovation
+            Ventures spanning smart homes, robotics, creative studios, and AI-powered fitness
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, idx) => (
             <div
               key={project.title}
               className="group animate-fade-in-up opacity-0"
               style={{ animationDelay: `${idx * 0.15}s` }}
             >
-              <div className="h-full p-8 rounded-2xl bg-card border border-border hover:border-accent/50 transition-all space-y-6">
+              <div className="relative h-full p-8 rounded-2xl bg-card border border-border hover:border-accent/50 transition-all space-y-6 overflow-hidden">
+                {/* Coming soon badge */}
+                {project.comingSoon && (
+                  <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                    <Clock className="w-3.5 h-3.5 text-accent" />
+                    <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+                      Coming Soon
+                    </span>
+                  </div>
+                )}
+
                 {/* Project gradient header */}
-                <div className={`h-32 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                  <div className="text-6xl font-bold text-white/20">
+                <div
+                  className={`h-32 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+                >
+                  <div className="text-6xl font-bold text-foreground/10">
                     {project.title.charAt(0)}
                   </div>
                 </div>
@@ -75,14 +101,16 @@ export const Projects = () => {
                       variant="outline"
                       size="sm"
                       className="flex-1 group-hover:border-accent/50 transition-colors"
+                      disabled={project.comingSoon}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      View
+                      {project.comingSoon ? "Coming Soon" : "View"}
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       className="flex-1 group-hover:border-accent/50 transition-colors"
+                      disabled={project.comingSoon}
                     >
                       <Github className="w-4 h-4 mr-2" />
                       Code
