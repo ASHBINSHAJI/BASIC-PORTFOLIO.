@@ -1,4 +1,4 @@
-import { Mail, Github, Phone, Calendar, MessageCircle, Instagram } from "lucide-react";
+import { Mail, Github, Phone, Calendar, MessageCircle, Instagram, Construction } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingForm } from "./BookingForm";
 import { useState } from "react";
@@ -124,10 +124,31 @@ export const Contact = () => {
           </div>
         </div>
 
+        {/* Under Construction */}
+        <div className="pt-12">
+          <div className="relative overflow-hidden rounded-2xl border border-accent/30">
+            <div className="absolute inset-0 opacity-10" style={{
+              background: 'repeating-linear-gradient(45deg, hsl(40 60% 50%) 0px, hsl(40 60% 50%) 10px, transparent 10px, transparent 20px, hsl(20 8% 7%) 20px, hsl(20 8% 7%) 30px, transparent 30px, transparent 40px)',
+              backgroundSize: '56.57px 56.57px',
+              animation: 'stripe-scroll 3s linear infinite',
+            }} />
+            <div className="relative z-10 p-8 flex flex-col items-center gap-4 text-center">
+              <div className="relative">
+                <Construction className="w-10 h-10 text-accent" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
+              </div>
+              <h3 className="text-xl font-bold">Work Under Construction</h3>
+              <p className="text-sm text-muted-foreground max-w-md">
+                This portfolio is a work in progress. Exciting updates coming soon — stay tuned!
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="pt-12 text-muted-foreground">
           <p className="text-sm">
-            © 2024 Ashbin. Designed & Built with passion.
+            © 2025 Ashbin. Designed & Built with passion.
           </p>
           <p className="text-xs mt-2">
             Inspired by the simplicity and innovation of Steve Jobs
