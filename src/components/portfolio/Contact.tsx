@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Github, Twitter, Phone, Calendar } from "lucide-react";
+import { Mail, Github, Phone, Calendar, MessageCircle, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingForm } from "./BookingForm";
 import { useState } from "react";
@@ -59,40 +59,48 @@ export const Contact = () => {
             </div>
           )}
 
-          {/* Phone number */}
-          <div className="flex items-center justify-center gap-3 text-muted-foreground">
-            <Phone className="w-5 h-5" />
-            <a 
-              href="tel:+1234567890" 
-              className="text-lg hover:text-accent transition-colors"
+          {/* Phone & WhatsApp */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-muted-foreground">
+            <div className="flex items-center gap-3">
+              <Phone className="w-5 h-5" />
+              <a 
+                href="tel:+919645023535" 
+                className="text-lg hover:text-accent transition-colors"
+              >
+                +91 96450 23535
+              </a>
+            </div>
+            <a
+              href="https://wa.me/919645023535"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-lg hover:text-accent transition-colors"
             >
-              +1 (234) 567-890
+              <MessageCircle className="w-5 h-5" />
+              WhatsApp
             </a>
           </div>
 
           {/* Social links */}
           <div className="flex justify-center gap-4 pt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
-            >
-              <Linkedin className="w-5 h-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
-            >
-              <Github className="w-5 h-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
-            >
-              <Twitter className="w-5 h-5" />
-            </Button>
+            <a href="https://www.instagram.com/aaashbinnn_shaji?igsh=MTRzaTM5MWV6djVzcQ==" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
+              >
+                <Instagram className="w-5 h-5" />
+              </Button>
+            </a>
+            <a href="https://github.com/ASHBINSHAJI" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
+              >
+                <Github className="w-5 h-5" />
+              </Button>
+            </a>
           </div>
         </div>
 
