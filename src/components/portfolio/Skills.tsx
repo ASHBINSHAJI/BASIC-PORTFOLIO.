@@ -5,22 +5,22 @@ export const Skills = () => {
     {
       title: "Frontend",
       skills: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Next.js"],
-      comingSoon: false,
+      comingSoon: true,
     },
     {
       title: "Backend",
       skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs"],
-      comingSoon: false,
+      comingSoon: true,
     },
     {
       title: "Creative & Animation",
       skills: ["Blender", "After Effects", "Premiere Pro", "Motion Graphics", "UI/UX Design"],
-      comingSoon: false,
+      comingSoon: true,
     },
     {
       title: "AI & Tools",
       skills: ["Gemini", "AI Automation", "ChatGPT", "Zapier", "Make.com", "Git"],
-      comingSoon: false,
+      comingSoon: true,
     },
     {
       title: "Robotics R&D & IoT",
