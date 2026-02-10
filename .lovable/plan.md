@@ -1,24 +1,23 @@
 
 
-## Portfolio Updates
+## Add Gaming Project to Portfolio
 
-### 1. Add "Under Construction" Banner at the Bottom
-- Add a prominent "Work Under Construction" section just before the footer in `Contact.tsx`
-- Style it with a construction-themed design: warning stripes pattern (black and gold/brass to match the executive theme), a construction icon, and a message like "This portfolio is a work in progress. Exciting updates coming soon!"
-- Include a subtle animated element (pulsing dot or rotating gear icon) to make it feel alive
+### What's being added
+A new project card for your **street-level racing game** in the Featured Projects section, marked as "Coming Soon."
 
-### 2. Minor Improvements
-- Update the footer copyright year from 2024 to 2025
-- Ensure consistent spacing between the "Buy Me a Tea" section, the construction banner, and the footer
+### Project Card Details
+- **Title**: Something like "Street Outlaws Racing" (or suggest a name you prefer)
+- **Description**: A street-level illegal racing game (NFS-style) where players can exit their car to explore the city, visit dealerships, workshops, and home. Features a thrilling story mode, truck transport for cars, multiplayer/LAN play, a deep workshop system with blueprints and custom body kits, headlights, paint mixing, and a realistic petrol/diesel fuel system with pumps across the map.
+- **Tags**: Gaming, Open World, Multiplayer, Racing
+- **Gradient**: A dark red/black street-racing vibe (e.g., `from-red-600/20 to-gray-900/20`)
+- **Status**: Coming Soon
 
-### Technical Details
+### Technical Changes
 
-**File: `src/components/portfolio/Contact.tsx`**
-- Add a new "Under Construction" section between the "Buy Me a Tea" block and the footer
-- Use `lucide-react` icons (`Construction` or `Wrench`) for the visual
-- Add animated warning stripe pattern using CSS gradients (diagonal black/gold repeating stripes)
-- Update copyright year to 2025
+**File: `src/components/portfolio/Projects.tsx`**
+- Add a 5th project object to the `projects` array with the racing game details
+- Update the subtitle text to mention "gaming" alongside the other ventures
 
-**File: `src/index.css`** (if needed)
-- Add a `@keyframes` animation for the construction stripe movement or a pulsing effect
-
+### Notes
+- The description will be a polished summary of your game concept, covering the key unique features (exit car, workshop blueprints, fuel system, multiplayer)
+- If you have a specific name for the game, let me know and I'll use that instead
