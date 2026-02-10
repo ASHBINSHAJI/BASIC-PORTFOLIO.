@@ -1,24 +1,31 @@
+import { Clock } from "lucide-react";
+
 export const Skills = () => {
   const skillCategories = [
     {
       title: "Frontend",
       skills: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Next.js"],
+      comingSoon: false,
     },
     {
       title: "Backend",
       skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs"],
+      comingSoon: false,
     },
     {
       title: "Creative & Animation",
       skills: ["Blender", "After Effects", "Premiere Pro", "Motion Graphics", "UI/UX Design"],
+      comingSoon: false,
     },
     {
       title: "AI & Tools",
       skills: ["Gemini", "AI Automation", "ChatGPT", "Zapier", "Make.com", "Git"],
+      comingSoon: false,
     },
     {
       title: "Robotics R&D & IoT",
       skills: ["Arduino", "Raspberry Pi", "ROS", "Sensor Integration", "PCB Design", "MQTT"],
+      comingSoon: true,
     },
   ];
 
@@ -38,10 +45,18 @@ export const Skills = () => {
           {skillCategories.map((category, idx) => (
             <div
               key={category.title}
-              className="space-y-4 animate-fade-in-up opacity-0"
+              className="space-y-4 animate-fade-in-up opacity-0 relative"
               style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <h3 className="text-2xl font-bold text-accent">{category.title}</h3>
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl font-bold text-accent">{category.title}</h3>
+                {category.comingSoon && (
+                  <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
+                    <Clock className="w-3 h-3 text-accent" />
+                    <span className="text-[10px] font-semibold text-accent uppercase tracking-wider">Soon</span>
+                  </span>
+                )}
+              </div>
               <div className="space-y-3">
                 {category.skills.map((skill) => (
                   <div
