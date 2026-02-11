@@ -30,7 +30,7 @@ export const Skills = () => {
   ];
 
   return (
-    <section className="py-32 px-6">
+    <section className="py-40 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
@@ -49,7 +49,7 @@ export const Skills = () => {
               style={{ animationDelay: `${idx * 0.1}s` }}
             >
               <div className="flex items-center gap-3">
-                <h3 className="text-2xl font-bold text-accent">{category.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
                 {category.comingSoon && (
                   <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
                     <Clock className="w-3 h-3 text-accent" />

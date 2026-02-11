@@ -7,7 +7,7 @@ export const Contact = () => {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <section id="contact" className="py-32 px-6">
+    <section id="contact" className="py-40 px-6">
       <div className="max-w-4xl mx-auto text-center space-y-12">
         <div className="space-y-6">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
