@@ -5,6 +5,7 @@ import { About } from "@/components/portfolio/About";
 import { Skills } from "@/components/portfolio/Skills";
 import { Projects } from "@/components/portfolio/Projects";
 import { Contact } from "@/components/portfolio/Contact";
+import { Services } from "@/components/portfolio/Services";
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -19,6 +20,7 @@ const Index = () => {
       <About />
       <Skills />
       <Projects />
+      <Services />
       <Contact />
     </div>
   );

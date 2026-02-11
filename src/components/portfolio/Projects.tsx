@@ -50,7 +50,7 @@ export const Projects = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-            <span className="liquid-glass-subtle">Featured Projects</span>
+            <span className="liquid-glass-subtle">Building</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Ventures spanning smart homes, robotics, creative studios, AI-powered fitness, and gaming
@@ -118,10 +118,12 @@ export const Projects = () => {
                       variant="outline"
                       size="sm"
                       className="flex-1 group-hover:border-accent/50 transition-colors"
-                      disabled={project.comingSoon}
+                      asChild
                     >
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
+                      <a href="https://github.com/ASHBINSHAJI" target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4 mr-2" />
+                        GitHub
+                      </a>
                     </Button>
                   </div>
                 </div>
