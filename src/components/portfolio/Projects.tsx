@@ -46,7 +46,7 @@ export const Projects = () => {
   ];
 
   return (
-    <section className="py-32 px-6 bg-secondary/30">
+    <section className="py-40 px-6 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
@@ -87,7 +87,7 @@ export const Projects = () => {
                 {/* Project details */}
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold">{project.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-loose">
                     {project.description}
                   </p>
 

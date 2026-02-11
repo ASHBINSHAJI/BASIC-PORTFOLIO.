@@ -11,7 +11,7 @@ const services = [
 
 export const Services = () => {
   return (
-    <section className="py-32 px-6">
+    <section className="py-40 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">

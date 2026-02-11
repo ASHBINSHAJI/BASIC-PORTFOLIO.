@@ -12,7 +12,7 @@ export const Hero = () => {
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/10 animate-fade-in" />
       
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10">
         {/* Greeting */}
         <div className="animate-fade-in-up opacity-0" style={{ animationDelay: "0.1s" }}>
           <p className="text-muted-foreground text-lg font-medium tracking-wide">
@@ -32,18 +32,13 @@ export const Hero = () => {
                 className="viscous-letter"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  filter: [
-                    "drop-shadow(0 0 8px rgba(0,0,0,0.4))",
-                    "drop-shadow(0 0 16px rgba(255,255,255,0.6))",
-                    "drop-shadow(0 0 8px rgba(0,0,0,0.4))",
-                  ],
-                  scale: [1, 1.02, 1],
+                  scale: [1, 1.01, 1],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 8,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: i * 0.3,
+                  delay: i * 0.4,
                 }}
               >
                 {letter}
@@ -67,13 +62,13 @@ export const Hero = () => {
           className="flex flex-wrap justify-center gap-4 text-sm md:text-base animate-fade-in-up opacity-0"
           style={{ animationDelay: "0.7s" }}
         >
-          <span className="px-4 py-2 rounded-full bg-accent/10 text-accent font-medium">
+           <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
             Animation & Motion Graphics
           </span>
-          <span className="px-4 py-2 rounded-full bg-accent/10 text-accent font-medium">
+           <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
             AI Automation
           </span>
-          <span className="px-4 py-2 rounded-full bg-accent/10 text-accent font-medium">
+          <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
             Full-Stack Development
           </span>
         </div>

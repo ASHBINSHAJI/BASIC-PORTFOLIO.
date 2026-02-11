@@ -55,7 +55,7 @@ All colors MUST be HSL.
 
   :root {
     --radius: 0.75rem;
-    --electric: 40 60% 50%;
+    --electric: 36 15% 55%;
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 20 10% 10%;
@@ -65,7 +65,7 @@ All colors MUST be HSL.
     --sidebar-accent: 20 8% 14%;
     --sidebar-accent-foreground: 36 20% 92%;
     --sidebar-border: 30 8% 18%;
-    --sidebar-ring: 40 60% 50%;
+    --sidebar-ring: 36 15% 55%;
   }
 
   .dark {
@@ -121,7 +121,7 @@ All colors MUST be HSL.
     --muted: 20 6% 16%;
     --muted-foreground: 30 10% 55%;
 
-    --accent: 40 60% 50%;
+    --accent: 36 15% 55%;
     --accent-foreground: 20 8% 7%;
 
     --destructive: 0 63% 31%;
@@ -129,10 +129,10 @@ All colors MUST be HSL.
 
     --border: 30 8% 18%;
     --input: 30 8% 18%;
-    --ring: 40 60% 50%;
+    --ring: 36 15% 55%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(40 60% 50% / 0.12), hsl(0 40% 25% / 0.08));
-    --glow: 0 8px 32px hsl(40 60% 50% / 0.2);
+    --hero-gradient: linear-gradient(135deg, hsl(36 15% 55% / 0.08), hsl(0 20% 20% / 0.05));
+    --glow: 0 4px 16px hsl(36 15% 55% / 0.1);
   }
 }
 
@@ -159,11 +159,11 @@ All colors MUST be HSL.
   }
   
   .animate-fade-in-up {
-    animation: fade-in-up 0.8s ease-out forwards;
+    animation: fade-in-up 1.2s ease-out forwards;
   }
   
   .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
+    animation: fade-in 1s ease-out forwards;
   }
 
   .viscous-text {
@@ -187,7 +187,7 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: viscous-flow 6s ease-in-out infinite;
+    animation: viscous-flow 10s ease-in-out infinite;
     position: relative;
   }
 
@@ -221,7 +221,7 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: viscous-flow 6s ease-in-out infinite;
+    animation: viscous-flow 10s ease-in-out infinite;
   }
 
   @keyframes viscous-flow {
@@ -252,11 +252,11 @@ All colors MUST be HSL.
       hsl(var(--accent) / 0.18) 100%
     );
     background-size: 200% 200%;
-    animation: liquid-shift 6s ease-in-out infinite;
+    animation: liquid-shift 10s ease-in-out infinite;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px hsl(var(--accent) / 0.3));
+    filter: none;
   }
 
   .liquid-glass-subtle {
@@ -271,11 +271,11 @@ All colors MUST be HSL.
       hsl(var(--foreground)) 100%
     );
     background-size: 300% 100%;
-    animation: liquid-shimmer 5s ease-in-out infinite;
+    animation: liquid-shimmer 8s ease-in-out infinite;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 1px 4px hsl(var(--accent) / 0.2));
+    filter: none;
   }
 
   .liquid-glass-card {

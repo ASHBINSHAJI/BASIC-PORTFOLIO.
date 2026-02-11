@@ -2,7 +2,7 @@ import { Sparkles, Rocket, Code2 } from "lucide-react";
 
 export const About = () => {
   return (
-    <section className="py-32 px-6 bg-secondary/30">
+    <section className="py-40 px-6 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left content */}
@@ -10,13 +10,13 @@ export const About = () => {
             <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
               <span className="liquid-glass-subtle">About Me</span>
             </h2>
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <div className="space-y-5 text-lg text-muted-foreground leading-loose">
               <p>
                 I'm a passionate <span className="text-foreground font-semibold">MERN Stack Developer</span> who 
                 believes in the power of technology to transform ideas into reality.
               </p>
               <p>
-                As the founder of <span className="text-accent font-semibold">Airnext</span>, <span className="text-accent font-semibold">E-onit</span>, and <span className="text-accent font-semibold">The Heaven Studio</span>, I'm building 
+                As the founder of <span className="text-foreground font-semibold">Airnext</span>, <span className="text-foreground font-semibold">E-onit</span>, and <span className="text-foreground font-semibold">The Heaven Studio</span>, I'm building 
                 innovative solutions across smart home automation, humanoid robotics, and creative digital experiences.
               </p>
               <p>
