@@ -22,11 +22,11 @@ export const Hero = () => {
 
         {/* Name */}
         <h1 
-          className="text-7xl md:text-9xl font-bold tracking-tighter animate-fade-in-up opacity-0 relative"
+          className="text-5xl md:text-8xl font-bold tracking-tighter animate-fade-in-up opacity-0 relative"
           style={{ animationDelay: "0.3s" }}
         >
           <span className="viscous-text">
-            {"Ashbin".split("").map((letter, i) => (
+            {"Ashbin Shaji".split("").map((letter, i) => (
               <motion.span
                 key={i}
                 className="viscous-letter"
@@ -58,10 +58,7 @@ export const Hero = () => {
           style={{ animationDelay: "0.5s" }}
         >
           <p className="text-2xl md:text-4xl font-semibold text-balance">
-            MERN Stack Developer
-          </p>
-          <p className="text-xl md:text-2xl text-muted-foreground">
-            Founder of <span className="text-accent font-semibold">Airnext</span> · <span className="text-accent font-semibold">E-onit</span> · <span className="text-accent font-semibold">The Heaven Studio</span>
+            Full-Stack Developer & Entrepreneur
           </p>
         </div>
 
