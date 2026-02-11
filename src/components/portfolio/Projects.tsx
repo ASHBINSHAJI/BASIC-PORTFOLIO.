@@ -35,6 +35,14 @@ export const Projects = () => {
       gradient: "from-blue-600/20 to-slate-900/20",
       comingSoon: true,
     },
+    {
+      title: "Street Outlaws Racing",
+      description:
+        "A street-level illegal racing game where you can exit your car to explore the city, visit dealerships, workshops, and home. Features a thrilling story mode, truck transport, multiplayer/LAN play, a deep workshop with blueprints & custom body kits, paint mixing, and a realistic petrol/diesel fuel system.",
+      tags: ["Gaming", "Open World", "Multiplayer", "Racing"],
+      gradient: "from-red-600/20 to-gray-900/20",
+      comingSoon: true,
+    },
   ];
 
   return (
@@ -45,7 +53,7 @@ export const Projects = () => {
             <span className="liquid-glass-subtle">Featured Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ventures spanning smart homes, robotics, creative studios, and AI-powered fitness
+            Ventures spanning smart homes, robotics, creative studios, AI-powered fitness, and gaming
           </p>
         </div>
 
