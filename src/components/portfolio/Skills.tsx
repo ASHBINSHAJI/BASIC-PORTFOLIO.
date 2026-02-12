@@ -9,17 +9,22 @@ export const Skills = () => {
     },
     {
       title: "Backend",
-      skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs"],
+      skills: ["Python", "Django", "Node.js", "PostgreSQL", "REST APIs"],
       comingSoon: true,
     },
     {
       title: "Creative & Animation",
-      skills: ["Blender", "After Effects", "Premiere Pro", "Motion Graphics", "UI/UX Design"],
+      skills: ["Blender", "After Effects", "UI/UX Design"],
       comingSoon: true,
     },
     {
       title: "AI & Tools",
-      skills: ["Gemini", "AI Automation", "ChatGPT", "Zapier", "Make.com", "Git"],
+      skills: ["Gemini", "AI Automation", "ChatGPT", "Lovable", "Affinity", "Zapier", "Make.com", "Git"],
+      comingSoon: true,
+    },
+    {
+      title: "DevOps",
+      skills: ["Docker", "CI/CD", "Linux", "Nginx", "AWS", "Cloud Deploy"],
       comingSoon: true,
     },
     {
