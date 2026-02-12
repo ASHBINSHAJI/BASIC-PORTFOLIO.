@@ -6,7 +6,7 @@ export const Projects = () => {
     {
       title: "Airnext",
       description:
-        "Smart home innovation reimagined. If smooth and quality had a definition, it's Airnext — automating your home beyond imagination with solutions that actually work.",
+        "A smart home system I am engineering (IoT + Web Dashboard + Automation). If smooth and quality had a definition, it's Airnext — automating your home beyond imagination with solutions that actually work.",
       tags: ["IoT", "AI", "Smart Home", "Automation"],
       gradient: "from-cyan-500/20 to-blue-600/20",
       comingSoon: true,

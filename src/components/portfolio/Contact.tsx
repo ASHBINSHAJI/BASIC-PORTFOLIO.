@@ -24,7 +24,6 @@ export const Contact = () => {
         <div className="space-y-8">
           {!showForm ? (
             <>
-              {/* Contact methods */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button 
                   size="lg"
@@ -59,19 +58,18 @@ export const Contact = () => {
             </div>
           )}
 
-          {/* Phone & WhatsApp */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-muted-foreground">
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5" />
               <a 
-                href="tel:+919645023535" 
+                href="tel:+919645013535" 
                 className="text-lg hover:text-accent transition-colors"
               >
-                +91 96450 23535
+                +91 96450 13535
               </a>
             </div>
             <a
-              href="https://wa.me/919645023535"
+              href="https://wa.me/919645013535"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-lg hover:text-accent transition-colors"
@@ -81,7 +79,6 @@ export const Contact = () => {
             </a>
           </div>
 
-          {/* Social links */}
           <div className="flex justify-center gap-4 pt-8">
             <a href="https://www.instagram.com/aaashbinnn_shaji?igsh=MTRzaTM5MWV6djVzcQ==" target="_blank" rel="noopener noreferrer">
               <Button
@@ -104,31 +101,11 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* Buy Me a Tea */}
-        <div className="pt-12">
-          <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-secondary/50 border border-border">
-            <span className="text-4xl">☕</span>
-            <h3 className="text-xl font-bold">Buy Me a Tea</h3>
-            <p className="text-sm text-muted-foreground max-w-sm">
-              If you enjoy my work and want to support me, consider buying me a tea!
-            </p>
-            <a
-              href="https://www.buymeacoffee.com/ashbin"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-5 rounded-full">
-                ☕ Buy Me a Tea
-              </Button>
-            </a>
-          </div>
-        </div>
-
         {/* Under Construction */}
         <div className="pt-12">
           <div className="relative overflow-hidden rounded-2xl border border-accent/30">
             <div className="absolute inset-0 opacity-10" style={{
-              background: 'repeating-linear-gradient(45deg, hsl(40 60% 50%) 0px, hsl(40 60% 50%) 10px, transparent 10px, transparent 20px, hsl(20 8% 7%) 20px, hsl(20 8% 7%) 30px, transparent 30px, transparent 40px)',
+              background: 'repeating-linear-gradient(45deg, hsl(217 91% 60%) 0px, hsl(217 91% 60%) 10px, transparent 10px, transparent 20px, hsl(224 50% 7%) 20px, hsl(224 50% 7%) 30px, transparent 30px, transparent 40px)',
               backgroundSize: '56.57px 56.57px',
               animation: 'stripe-scroll 3s linear infinite',
             }} />
