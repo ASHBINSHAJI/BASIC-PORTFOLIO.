@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock, Lock } from "lucide-react";
 
 export const Skills = () => {
   const skillCategories = [
@@ -6,31 +6,37 @@ export const Skills = () => {
       title: "Frontend",
       skills: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Next.js"],
       comingSoon: true,
+      blurred: false,
     },
     {
       title: "Backend",
       skills: ["Python", "Django", "Node.js", "PostgreSQL", "REST APIs"],
       comingSoon: true,
+      blurred: false,
     },
     {
       title: "Creative & Animation",
       skills: ["Blender", "After Effects", "UI/UX Design"],
       comingSoon: true,
+      blurred: false,
     },
     {
       title: "AI & Tools",
       skills: ["Gemini", "AI Automation", "ChatGPT", "Lovable", "Affinity", "Zapier", "Make.com", "Git"],
       comingSoon: true,
+      blurred: false,
     },
     {
       title: "DevOps",
       skills: ["Docker", "CI/CD", "Linux", "Nginx", "AWS", "Cloud Deploy"],
       comingSoon: true,
+      blurred: true,
     },
     {
       title: "Robotics R&D & IoT",
       skills: ["Arduino", "Raspberry Pi", "ROS", "Sensor Integration", "PCB Design", "MQTT"],
       comingSoon: true,
+      blurred: true,
     },
   ];
 
@@ -53,25 +59,37 @@ export const Skills = () => {
               className="space-y-4 animate-fade-in-up opacity-0 relative"
               style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <div className="flex items-center gap-3">
-                <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
-                {category.comingSoon && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
-                    <Clock className="w-3 h-3 text-accent" />
-                    <span className="text-[10px] font-semibold text-accent uppercase tracking-wider">Soon</span>
-                  </span>
-                )}
+              <div className={category.blurred ? "filter blur-[5px] select-none pointer-events-none" : ""}>
+                <div className="flex items-center gap-3">
+                  <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                  {category.comingSoon && (
+                    <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
+                      <Clock className="w-3 h-3 text-accent" />
+                      <span className="text-[10px] font-semibold text-accent uppercase tracking-wider">Soon</span>
+                    </span>
+                  )}
+                </div>
+                <div className="space-y-3 mt-4">
+                  {category.skills.map((skill) => (
+                    <div
+                      key={skill}
+                      className="px-4 py-3 rounded-lg bg-secondary/50 hover:bg-accent/10 transition-colors border border-border hover:border-accent/30"
+                    >
+                      <p className="font-medium">{skill}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-3">
-                {category.skills.map((skill) => (
-                  <div
-                    key={skill}
-                    className="px-4 py-3 rounded-lg bg-secondary/50 hover:bg-accent/10 transition-colors border border-border hover:border-accent/30"
-                  >
-                    <p className="font-medium">{skill}</p>
+
+              {/* Coming Soon overlay for blurred categories */}
+              {category.blurred && (
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <div className="flex flex-col items-center gap-2 px-6 py-4 rounded-xl bg-card/90 border border-accent/30 backdrop-blur-sm shadow-lg">
+                    <Lock className="w-5 h-5 text-accent" />
+                    <span className="text-sm font-bold">Coming Soon</span>
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
