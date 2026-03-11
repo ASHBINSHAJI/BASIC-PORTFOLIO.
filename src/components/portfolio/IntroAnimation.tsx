@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useCallback } from "react";
+import { playOpenSound, playClickSound } from "@/lib/sounds";
 
 interface IntroAnimationProps {
   onComplete: () => void;
