@@ -42,7 +42,6 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   const handleOpen = useCallback(() => {
     if (splitting) return;
-    playOpenSound();
     playClickSound();
     setSplitting(true);
     setTimeout(() => onComplete(), 900);
