@@ -8,7 +8,7 @@ import { ProjectIdeas } from "@/components/portfolio/ProjectIdeas";
 import { Services } from "@/components/portfolio/Services";
 import { BuyMeATea } from "@/components/portfolio/BuyMeATea";
 import { Contact } from "@/components/portfolio/Contact";
-import { playScrollSound, playClickSound, playHoverSound } from "@/lib/sounds";
+import { playClickSound } from "@/lib/sounds";
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -16,11 +16,6 @@ const Index = () => {
   useEffect(() => {
     if (showIntro) return;
 
-    // Scroll sound
-    const handleScroll = () => playScrollSound();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Click sound on any interactive element
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
@@ -46,23 +41,8 @@ const Index = () => {
     };
     document.addEventListener("click", handleClick);
 
-    // Hover sound on cards and sections
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.closest("[class*='card']") ||
-        target.closest(".group") ||
-        target.closest("[class*='rounded-2xl']")
-      ) {
-        playHoverSound();
-      }
-    };
-    document.addEventListener("mouseenter", handleMouseEnter, true);
-
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("click", handleClick);
-      document.removeEventListener("mouseenter", handleMouseEnter, true);
     };
   }, [showIntro]);
 
