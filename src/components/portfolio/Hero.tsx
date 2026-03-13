@@ -1,127 +1,103 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-export const Hero = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
+const Particle = ({ delay, x, y, size }: { delay: number; x: number; y: number; size: number }) => (
+  <motion.div
+    className="absolute rounded-full"
+    style={{
+      left: `${x}%`,
+      top: `${y}%`,
+      width: size,
+      height: size,
+      background: `radial-gradient(circle, hsl(25 95% 55% / 0.25), transparent 70%)`,
+    }}
+    animate={{ y: [0, -25, 0], opacity: [0.15, 0.4, 0.15], scale: [1, 1.2, 1] }}
+    transition={{ duration: 4 + Math.random() * 3, repeat: Infinity, ease: "easeInOut", delay }}
+  />
+);
 
-  const firstName = "Ashbin";
-  const lastName = "Shaji";
+export const Hero = () => {
+  const particles = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: 4 + Math.random() * 8,
+    delay: Math.random() * 3,
+  }));
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/10 animate-fade-in" />
-      
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10">
-        <div className="animate-fade-in-up opacity-0" style={{ animationDelay: "0.1s" }}>
-          <p className="text-muted-foreground text-lg font-medium tracking-wide">
-            Hello, I'm
-          </p>
-        </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
+        <motion.div
+          className="particle-glow w-[600px] h-[600px] -top-40 -left-40"
+          animate={{ x: [0, 60, -30, 0], y: [0, -40, 30, 0], scale: [1, 1.2, 0.9, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          style={{ opacity: 0.12 }}
+        />
+        <motion.div
+          className="particle-glow-blue w-[500px] h-[500px] -bottom-20 -right-20"
+          animate={{ x: [0, -40, 20, 0], y: [0, 30, -20, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          style={{ opacity: 0.08 }}
+        />
+      </div>
 
-        <h1 
-          className="text-5xl md:text-8xl font-bold tracking-tighter animate-fade-in-up opacity-0 relative"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <span className="viscous-text">
-            {firstName.split("").map((letter, i) => (
-              <motion.span
-                key={`first-${i}`}
-                className="viscous-letter"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  scale: [1, 1.01, 1],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.4,
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-            <span className="inline-block w-4 md:w-8" />
-            {lastName.split("").map((letter, i) => (
-              <motion.span
-                key={`last-${i}`}
-                className="viscous-letter"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  scale: [1, 1.01, 1],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: (firstName.length + i) * 0.4,
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </span>
-        </h1>
+      {particles.map((p) => (
+        <Particle key={p.id} delay={p.delay} x={p.x} y={p.y} size={p.size} />
+      ))}
 
-        <div 
-          className="space-y-4 animate-fade-in-up opacity-0"
-          style={{ animationDelay: "0.5s" }}
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-6 space-y-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-2xl md:text-4xl font-semibold text-balance">
-            Python Django Developer & Entrepreneur
-          </p>
-        </div>
+          <p className="text-sm tracking-[0.4em] uppercase text-accent mb-6">Creator · Builder · Visionary</p>
+          <h1 className="text-6xl md:text-[9rem] font-black tracking-tight leading-none">
+            <span className="cinematic-text-orange text-glow-orange">Ashbin</span>
+            <br />
+            <span className="cinematic-text">Shaji</span>
+          </h1>
+        </motion.div>
 
-        {/* Trust quote */}
-        <div 
-          className="animate-fade-in-up opacity-0"
-          style={{ animationDelay: "0.6s" }}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="text-lg md:text-xl font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed"
         >
-          <p className="text-lg md:text-xl text-muted-foreground italic">
-            "Can I trust this guy to finish my project?"
-          </p>
-        </div>
+          Building futuristic digital systems and experiences at the intersection of technology, animation, and design.
+        </motion.p>
 
-        <div 
-          className="flex flex-wrap justify-center gap-4 text-sm md:text-base animate-fade-in-up opacity-0"
-          style={{ animationDelay: "0.7s" }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+          className="pt-4"
         >
-          <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
-            Animation & Motion Graphics
-          </span>
-          <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
-            AI Automation
-          </span>
-          <span className="px-4 py-2 rounded-full bg-muted text-foreground/70 font-medium">
-            Python & Django
-          </span>
-        </div>
+          <blockquote className="max-w-xl mx-auto">
+            <p className="text-base md:text-lg italic text-muted-foreground/60 font-light leading-relaxed">
+              "People who are crazy enough to think they can change the world are the ones who do."
+            </p>
+            <footer className="mt-3 text-xs text-muted-foreground/30 tracking-[0.3em] uppercase">
+              — Steve Jobs
+            </footer>
+          </blockquote>
+        </motion.div>
 
-        <div 
-          className="pt-8 animate-fade-in-up opacity-0"
-          style={{ animationDelay: "0.9s" }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="pt-12"
         >
-          <Button 
-            size="lg"
-            onClick={scrollToContact}
-            className="group bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-6 h-10 rounded-full border border-primary/20 mx-auto flex justify-center pt-2"
           >
-            Let's Connect
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </div>
-
-        <div 
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-0 animate-fade-in"
-          style={{ animationDelay: "1.2s" }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center p-2">
-            <div className="w-1 h-3 rounded-full bg-muted-foreground/50" />
-          </div>
-        </div>
+            <div className="w-1 h-2.5 rounded-full bg-primary/40" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

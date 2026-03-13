@@ -1,136 +1,102 @@
-import { Mail, Github, Phone, Calendar, MessageCircle, Instagram, Construction } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { BookingForm } from "./BookingForm";
-import { useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Mail, Calendar, Phone, MessageCircle, Instagram, Github } from "lucide-react";
+import { BookingForm } from "@/components/portfolio/BookingForm";
+import { playClickSound } from "@/lib/sounds";
 
 export const Contact = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <section id="contact" className="py-40 px-6">
-      <div className="max-w-4xl mx-auto text-center space-y-12">
-        <div className="space-y-6">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
-            <span className="liquid-glass-subtle">Let's Build Something</span>
-            <br />
-            <span className="liquid-glass">Amazing Together</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Whether you have a project in mind or just want to chat about technology,
-            I'd love to hear from you.
-          </p>
-        </div>
+    <section id="contact" className="py-28 md:py-40 px-6 relative">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] particle-glow opacity-[0.06]" />
 
-        <div className="space-y-8">
+      <div className="max-w-4xl mx-auto text-center relative" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="space-y-6 mb-12"
+        >
+          <p className="text-sm tracking-[0.3em] uppercase text-accent mb-4">Let's Connect</p>
+          <h2 className="text-4xl md:text-6xl font-bold">
+            <span className="cinematic-text-orange">Let's Build</span>{" "}
+            <span className="cinematic-text">Together</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
+            Whether you're a startup, collaborator, or creator with an ambitious idea — let's create something extraordinary together.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-8"
+        >
           {!showForm ? (
-            <>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button 
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-                  onClick={() => setShowForm(true)}
-                >
-                  <Mail className="w-5 h-5 mr-3" />
-                  Get In Touch
-                </Button>
-                
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-semibold px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-                  onClick={() => setShowForm(true)}
-                >
-                  <Calendar className="w-5 h-5 mr-3" />
-                  Book a Call
-                </Button>
-              </div>
-            </>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => { playClickSound(); setShowForm(true); }}
+                className="liquid-glass-btn rounded-full px-10 py-4 text-base font-semibold text-foreground flex items-center justify-center gap-3 group"
+              >
+                <Mail className="w-5 h-5 text-primary group-hover:text-primary transition-colors" />
+                Get In Touch
+              </button>
+              <button
+                onClick={() => { playClickSound(); setShowForm(true); }}
+                className="liquid-glass-btn rounded-full px-10 py-4 text-base font-semibold text-foreground flex items-center justify-center gap-3 group"
+              >
+                <Calendar className="w-5 h-5 text-accent group-hover:text-accent transition-colors" />
+                Book a Call
+              </button>
+            </div>
           ) : (
             <div className="space-y-6">
-              <Button
-                variant="outline"
-                onClick={() => setShowForm(false)}
-                className="mb-4"
+              <button
+                onClick={() => { playClickSound(); setShowForm(false); }}
+                className="liquid-glass-btn rounded-full px-6 py-2 text-sm font-medium text-foreground/70 mb-4"
               >
                 ← Back
-              </Button>
+              </button>
               <BookingForm />
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-muted-foreground">
-            <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5" />
-              <a 
-                href="tel:+919645013535" 
-                className="text-lg hover:text-accent transition-colors"
-              >
-                +91 96450 13535
-              </a>
-            </div>
-            <a
-              href="https://wa.me/919645013535"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-lg hover:text-accent transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
-              WhatsApp
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-muted-foreground pt-4">
+            <a href="tel:+919645013535" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Phone className="w-4 h-4" /> +91 96450 13535
+            </a>
+            <a href="https://wa.me/919645013535" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <MessageCircle className="w-4 h-4" /> WhatsApp
             </a>
           </div>
 
-          <div className="flex justify-center gap-4 pt-8">
+          <div className="flex justify-center gap-4 pt-4">
             <a href="https://www.instagram.com/aaashbinnn_shaji?igsh=MTRzaTM5MWV6djVzcQ==" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
-              >
-                <Instagram className="w-5 h-5" />
-              </Button>
+              <button className="liquid-glass-btn rounded-full w-12 h-12 flex items-center justify-center" onClick={playClickSound}>
+                <Instagram className="w-5 h-5 text-foreground/70" />
+              </button>
             </a>
             <a href="https://github.com/ASHBINSHAJI" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full w-12 h-12 hover:border-accent/50 hover:bg-accent/10 transition-all"
-              >
-                <Github className="w-5 h-5" />
-              </Button>
+              <button className="liquid-glass-btn rounded-full w-12 h-12 flex items-center justify-center" onClick={playClickSound}>
+                <Github className="w-5 h-5 text-foreground/70" />
+              </button>
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Under Construction */}
-        <div className="pt-12">
-          <div className="relative overflow-hidden rounded-2xl border border-accent/30">
-            <div className="absolute inset-0 opacity-10" style={{
-              background: 'repeating-linear-gradient(45deg, hsl(217 91% 60%) 0px, hsl(217 91% 60%) 10px, transparent 10px, transparent 20px, hsl(224 50% 7%) 20px, hsl(224 50% 7%) 30px, transparent 30px, transparent 40px)',
-              backgroundSize: '56.57px 56.57px',
-              animation: 'stripe-scroll 3s linear infinite',
-            }} />
-            <div className="relative z-10 p-8 flex flex-col items-center gap-4 text-center">
-              <div className="relative">
-                <Construction className="w-10 h-10 text-accent" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
-              </div>
-              <h3 className="text-xl font-bold">Work Under Construction</h3>
-              <p className="text-sm text-muted-foreground max-w-md">
-                This portfolio is a work in progress. Exciting updates coming soon — stay tuned!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="pt-12 text-muted-foreground">
-          <p className="text-sm">
-            © 2025 Ashbin. Designed & Built with passion.
-          </p>
-          <p className="text-xs mt-2">
-            Inspired by the simplicity and innovation of Steve Jobs
-          </p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.5 }}
+          className="pt-20 text-muted-foreground/30"
+        >
+          <p className="text-sm">© 2025 Ashbin Shaji. All rights reserved.</p>
+          <p className="text-xs mt-1 tracking-wider">Built with vision. Designed with purpose.</p>
+        </motion.div>
       </div>
     </section>
   );
