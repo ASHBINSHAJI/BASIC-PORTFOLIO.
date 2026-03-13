@@ -6,28 +6,32 @@ function getCtx(): AudioContext {
   return audioCtx;
 }
 
-/** Calm, satisfying click — warm pop with body */
+/** Warm satisfying click — cute pop */
 export function playClickSound() {
   const ctx = getCtx();
+  const t = ctx.currentTime;
+
+  // Primary warm pop
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = "sine";
-  osc.frequency.setValueAtTime(700, ctx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(350, ctx.currentTime + 0.09);
-  gain.gain.setValueAtTime(0.3, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+  osc.frequency.setValueAtTime(800, t);
+  osc.frequency.exponentialRampToValueAtTime(400, t + 0.08);
+  gain.gain.setValueAtTime(0.18, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
   osc.connect(gain).connect(ctx.destination);
-  osc.start();
-  osc.stop(ctx.currentTime + 0.12);
+  osc.start(t);
+  osc.stop(t + 0.1);
 
-  const ot = ctx.createOscillator();
-  const otGain = ctx.createGain();
-  ot.type = "sine";
-  ot.frequency.setValueAtTime(1400, ctx.currentTime);
-  ot.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + 0.05);
-  otGain.gain.setValueAtTime(0.1, ctx.currentTime);
-  otGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
-  ot.connect(otGain).connect(ctx.destination);
-  ot.start();
-  ot.stop(ctx.currentTime + 0.06);
+  // Sparkle overtone
+  const osc2 = ctx.createOscillator();
+  const gain2 = ctx.createGain();
+  osc2.type = "sine";
+  osc2.frequency.setValueAtTime(1600, t);
+  osc2.frequency.exponentialRampToValueAtTime(900, t + 0.05);
+  gain2.gain.setValueAtTime(0.06, t);
+  gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+  osc2.connect(gain2).connect(ctx.destination);
+  osc2.start(t);
+  osc2.stop(t + 0.06);
 }
