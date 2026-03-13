@@ -47,7 +47,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        electric: "hsl(var(--electric))",
+        orange: {
+          DEFAULT: "hsl(var(--orange-glow))",
+          dark: "hsl(var(--orange-dark))",
+        },
+        "blue-glow": "hsl(var(--blue-glow))",
+        "blue-deep": "hsl(var(--blue-deep))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -56,20 +61,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
