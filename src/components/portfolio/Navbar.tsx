@@ -5,7 +5,6 @@ import { playClickSound } from "@/lib/sounds";
 
 const navItems = [
   { label: "Home", href: "#home" },
-  { label: "Philosophy", href: "#philosophy" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Games", href: "#games" },
@@ -37,27 +36,34 @@ export const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "glass-panel py-3" : "py-5 bg-transparent"
+          scrolled
+            ? "bg-background/90 backdrop-blur-md border-b border-border py-3"
+            : "py-5 bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <button onClick={() => handleClick("#home")} className="text-xl font-black tracking-[0.15em] text-primary hover:text-glow-orange transition-all">
-            A.S
+          <button
+            onClick={() => handleClick("#home")}
+            className="font-orbitron text-sm font-bold tracking-[0.2em] text-primary hover:opacity-80 transition-opacity"
+          >
+            AIR
           </button>
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleClick(item.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
+                className="text-xs font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-500 blue-line-glow pb-1"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
               </button>
             ))}
           </div>
-          <button className="md:hidden text-foreground" onClick={() => { playClickSound(); setMobileOpen(!mobileOpen); }}>
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button
+            className="md:hidden text-foreground"
+            onClick={() => { playClickSound(); setMobileOpen(!mobileOpen); }}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </motion.nav>
@@ -65,11 +71,10 @@ export const Navbar = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 glass-panel flex flex-col items-center justify-center gap-6"
-            style={{ backdropFilter: "blur(40px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-sm flex flex-col items-center justify-center gap-8"
           >
             {navItems.map((item, i) => (
               <motion.button
@@ -78,7 +83,7 @@ export const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
                 onClick={() => handleClick(item.href)}
-                className="text-2xl font-semibold text-foreground hover:text-primary transition-colors"
+                className="text-lg font-medium text-foreground hover:text-primary transition-colors tracking-wider uppercase"
               >
                 {item.label}
               </motion.button>
