@@ -1,12 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Rocket, Brain, Gamepad2, Eye } from "lucide-react";
 
 const goals = [
-  { icon: Brain, title: "Advanced AI Systems", desc: "Building intelligent systems that understand, learn, and create alongside humans." },
-  { icon: Eye, title: "Immersive Products", desc: "Creating digital experiences so refined they feel physical — bridging the gap between screen and reality." },
-  { icon: Gamepad2, title: "Cinematic Games", desc: "Story-driven game worlds with the visual fidelity and emotional depth of cinema." },
-  { icon: Rocket, title: "Global Impact", desc: "Technology and creativity combined to solve problems and inspire billions." },
+  { title: "Advanced AI Systems", desc: "Building intelligent systems that understand, learn, and create alongside humans." },
+  { title: "Immersive Products", desc: "Digital experiences so refined they feel physical — bridging screen and reality." },
+  { title: "Cinematic Games", desc: "Story-driven game worlds with the visual fidelity and emotional depth of cinema." },
+  { title: "Global Impact", desc: "Technology and creativity combined to solve problems and inspire billions." },
 ];
 
 export const FutureVision = () => {
@@ -14,43 +13,40 @@ export const FutureVision = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-28 md:py-40 px-6 relative">
+    <section className="py-32 md:py-44 px-6 relative tech-grid">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <p className="text-sm tracking-[0.3em] uppercase text-accent mb-4">Looking Ahead</p>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="cinematic-text-orange">Future</span>{" "}
-            <span className="cinematic-text">Vision</span>
+          <p className="text-[10px] tracking-[0.5em] uppercase text-accent mb-6 font-medium">Looking Ahead</p>
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+            <span className="heading-gradient">Future</span>{" "}
+            <span className="text-gradient-subtle">Vision</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto font-light leading-relaxed">
-            The long-term goal is clear — build technology that feels like magic, create experiences that inspire generations, and leave a lasting mark on how humanity interacts with the digital world.
+          <p className="text-lg text-muted-foreground font-light max-w-3xl leading-relaxed">
+            Build technology that feels like magic, create experiences that inspire generations, and leave a lasting mark on the digital world.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-px bg-border">
           {goals.map((goal, i) => (
             <motion.div
               key={goal.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="glass-panel-hover rounded-2xl p-8 space-y-4 group card-float"
-              style={{ animationDelay: `${i * 0.4}s` }}
+              className="bg-background p-8 md:p-10 group hover:bg-card transition-colors duration-500"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <goal.icon className="w-6 h-6 text-primary/70 group-hover:text-primary transition-colors" />
-              </div>
-              <h3 className="text-xl font-semibold">{goal.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{goal.desc}</p>
+              <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors duration-500">{goal.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{goal.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 section-line" />
     </section>
   );
 };
