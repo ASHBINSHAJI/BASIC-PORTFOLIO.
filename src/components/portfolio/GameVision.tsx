@@ -39,7 +39,7 @@ export const GameVision = () => {
           className="flex items-center gap-12 mb-16"
         >
           <div>
-            <p className="text-4xl font-bold font-orbitron text-primary">4</p>
+            <p className="text-4xl font-bold font-orbitron text-primary">3</p>
             <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1">Projects</p>
           </div>
           <div className="w-px h-10 bg-border" />

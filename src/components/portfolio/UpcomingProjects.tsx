@@ -10,10 +10,16 @@ const upcoming = [
   },
   {
     year: "2026",
+    title: "Heaven Studio",
+    desc: "A premium creative studio platform — merging cinematic storytelling, design, and next-gen digital experiences.",
+    status: "Releasing 2026",
+    highlight: true,
+  },
+  {
+    year: "2026",
     title: "Endeavor — E-Commerce Platform",
     desc: "A next-generation AI-powered e-commerce experience. Built with purpose. Released with precision.",
     status: "Expected Launch: 2027",
-    highlight: true,
   },
   {
     year: "2026",

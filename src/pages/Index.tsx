@@ -51,7 +51,7 @@ const Index = () => {
       <AnimationShowcase />
       <InnovationLab />
       <FreelanceSection />
-      <Team />
+      
       <FutureVision />
       <Contact />
     </div>
