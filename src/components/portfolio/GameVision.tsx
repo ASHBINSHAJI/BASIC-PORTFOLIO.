@@ -27,7 +27,7 @@ export const GameVision = () => {
           </h2>
           <p className="text-lg text-muted-foreground font-light max-w-3xl leading-relaxed">
             Creating cinematic, story-driven games inspired by real-world environments.
-            4 original game projects in development. First teaser launches in 2026.
+            3 original game projects in development. First teaser launches in 2026.
           </p>
         </motion.div>
 
