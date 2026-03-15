@@ -2,10 +2,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const games = [
-  { title: "Project Zenith", genre: "Action RPG", status: "In Development" },
-  { title: "Phantom Circuit", genre: "Cyberpunk Adventure", status: "In Development" },
-  { title: "Eclipse Protocol", genre: "Tactical Shooter", status: "Concept Phase" },
-  { title: "Aether Drift", genre: "Open World Racing", status: "Concept Phase" },
+  { title: "Car Part 1", genre: "Racing / Action", status: "In Development" },
+  { title: "Zombie Mobile", genre: "Survival Horror", status: "In Development" },
+  { title: "Clam Park", genre: "Adventure / Simulation", status: "Concept Phase" },
 ];
 
 export const GameVision = () => {
