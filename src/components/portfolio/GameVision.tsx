@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 const games = [
   { title: "Car Part 1", genre: "Racing / Action", status: "In Development" },
+  { title: "Car Part 2", genre: "Racing / Action Sequel", status: "Concept Phase" },
   { title: "Zombie Mobile", genre: "Survival Horror", status: "In Development" },
   { title: "Clam Park", genre: "Adventure / Simulation", status: "Concept Phase" },
 ];
@@ -27,11 +28,10 @@ export const GameVision = () => {
           </h2>
           <p className="text-lg text-muted-foreground font-light max-w-3xl leading-relaxed">
             Creating cinematic, story-driven games inspired by real-world environments.
-            3 original game projects in development. First teaser launches in 2026.
+            4 original game projects in development. First teaser launches in 2026.
           </p>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -39,7 +39,7 @@ export const GameVision = () => {
           className="flex items-center gap-12 mb-16"
         >
           <div>
-            <p className="text-4xl font-bold font-orbitron text-primary">3</p>
+            <p className="text-4xl font-bold font-orbitron text-primary">4</p>
             <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1">Projects</p>
           </div>
           <div className="w-px h-10 bg-border" />

@@ -16,7 +16,7 @@ const upcoming = [
     highlight: true,
   },
   {
-    year: "2026",
+    year: "2027",
     title: "Endeavor — E-Commerce Platform",
     desc: "A next-generation AI-powered e-commerce experience. Built with purpose. Released with precision.",
     status: "Expected Launch: 2027",
@@ -49,7 +49,6 @@ export const UpcomingProjects = () => {
           </h2>
         </motion.div>
 
-        {/* Status indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
