@@ -9,7 +9,7 @@ import { GameVision } from "@/components/portfolio/GameVision";
 import { AnimationShowcase } from "@/components/portfolio/AnimationShowcase";
 import { InnovationLab } from "@/components/portfolio/InnovationLab";
 import { FreelanceSection } from "@/components/portfolio/FreelanceSection";
-import { Team } from "@/components/portfolio/Team";
+
 import { FutureVision } from "@/components/portfolio/FutureVision";
 import { Contact } from "@/components/portfolio/Contact";
 import { IntroAnimation } from "@/components/portfolio/IntroAnimation";
@@ -51,7 +51,7 @@ const Index = () => {
       <AnimationShowcase />
       <InnovationLab />
       <FreelanceSection />
-      <Team />
+      
       <FutureVision />
       <Contact />
     </div>

@@ -27,7 +27,7 @@ const generateLetterTargets = (canvas: HTMLCanvasElement): { x: number; y: numbe
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#fff";
-  ctx.fillText("AIR", w / 2, h / 2);
+  ctx.fillText("ASHBIN", w / 2, h / 2);
 
   const imageData = ctx.getImageData(0, 0, w, h);
   const points: { x: number; y: number }[] = [];

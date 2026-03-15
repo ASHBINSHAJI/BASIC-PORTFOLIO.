@@ -2,10 +2,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const games = [
-  { title: "Project Zenith", genre: "Action RPG", status: "In Development" },
-  { title: "Phantom Circuit", genre: "Cyberpunk Adventure", status: "In Development" },
-  { title: "Eclipse Protocol", genre: "Tactical Shooter", status: "Concept Phase" },
-  { title: "Aether Drift", genre: "Open World Racing", status: "Concept Phase" },
+  { title: "Car Part 1", genre: "Racing / Action", status: "In Development" },
+  { title: "Zombie Mobile", genre: "Survival Horror", status: "In Development" },
+  { title: "Clam Park", genre: "Adventure / Simulation", status: "Concept Phase" },
 ];
 
 export const GameVision = () => {
@@ -28,7 +27,7 @@ export const GameVision = () => {
           </h2>
           <p className="text-lg text-muted-foreground font-light max-w-3xl leading-relaxed">
             Creating cinematic, story-driven games inspired by real-world environments.
-            4 original game projects in development. First teaser launches in 2026.
+            3 original game projects in development. First teaser launches in 2026.
           </p>
         </motion.div>
 
@@ -40,7 +39,7 @@ export const GameVision = () => {
           className="flex items-center gap-12 mb-16"
         >
           <div>
-            <p className="text-4xl font-bold font-orbitron text-primary">4</p>
+            <p className="text-4xl font-bold font-orbitron text-primary">3</p>
             <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1">Projects</p>
           </div>
           <div className="w-px h-10 bg-border" />
