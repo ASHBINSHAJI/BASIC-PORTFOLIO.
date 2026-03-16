@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { playClickSound } from "@/lib/sounds";
 
-const PARTICLE_COUNT = 350;
 const DURATION = 4500;
 
 interface Particle {
@@ -16,17 +15,28 @@ interface Particle {
   brightness: number;
 }
 
-const generateLetterTargets = (canvas: HTMLCanvasElement): { x: number; y: number }[] => {
+const generateLetterTargets = (
+  screenW: number,
+  screenH: number,
+  particleCount: number
+): { x: number; y: number }[] => {
+  const canvas = document.createElement("canvas");
+  // Use a fixed internal resolution for reliable text sampling
+  const scale = 2;
+  canvas.width = screenW * scale;
+  canvas.height = screenH * scale;
   const ctx = canvas.getContext("2d");
   if (!ctx) return [];
 
   const w = canvas.width;
   const h = canvas.height;
-  const isMobile = w < 600;
-  const fontSize = isMobile ? Math.min(w * 0.18, 80) : Math.min(w * 0.12, 140);
+  const isMobile = screenW < 600;
+  const fontSize = isMobile
+    ? Math.max(screenW * 0.2, 48) * scale
+    : Math.min(screenW * 0.12, 140) * scale;
 
   ctx.clearRect(0, 0, w, h);
-  ctx.font = `900 ${fontSize}px 'Orbitron', 'Space Grotesk', sans-serif`;
+  ctx.font = `900 ${fontSize}px 'Orbitron', 'Space Grotesk', monospace, sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#fff";
@@ -40,23 +50,25 @@ const generateLetterTargets = (canvas: HTMLCanvasElement): { x: number; y: numbe
     for (let x = 0; x < w; x += step) {
       const i = (y * w + x) * 4;
       if (imageData.data[i + 3] > 128) {
-        points.push({ x, y });
+        // Map back to screen coordinates
+        points.push({ x: x / scale, y: y / scale });
       }
     }
   }
 
-  const sampled: { x: number; y: number }[] = [];
-  const interval = Math.max(1, Math.floor(points.length / PARTICLE_COUNT));
-  for (let i = 0; i < points.length && sampled.length < PARTICLE_COUNT; i += interval) {
-    sampled.push(points[i]);
+  // Shuffle for better distribution then sample
+  for (let i = points.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [points[i], points[j]] = [points[j], points[i]];
   }
-  return sampled;
+
+  return points.slice(0, particleCount);
 };
 
 const AmbientParticle = ({ delay, isMobile }: { delay: number; isMobile: boolean }) => {
   const x = Math.random() * 100;
   const y = Math.random() * 100;
-  const size = 0.5 + Math.random() * (isMobile ? 1.5 : 2);
+  const size = isMobile ? 1.5 + Math.random() * 2 : 0.5 + Math.random() * 2;
   const duration = 5 + Math.random() * 8;
 
   return (
@@ -67,18 +79,18 @@ const AmbientParticle = ({ delay, isMobile }: { delay: number; isMobile: boolean
         top: `${y}%`,
         width: size,
         height: size,
-        background: `hsl(212 100% ${50 + Math.random() * 30}% / ${0.15 + Math.random() * 0.25})`,
+        background: `hsl(212 100% ${50 + Math.random() * 30}% / ${0.2 + Math.random() * 0.3})`,
       }}
       initial={{ opacity: 0, scale: 0 }}
       animate={{
-        opacity: [0, 0.5, 0.15, 0.4, 0],
-        scale: [0, 1, 0.7, 1.1, 0],
-        y: [0, -20, -8, -35, -55],
-        x: [0, Math.random() * 15 - 7, Math.random() * 25 - 12],
+        opacity: [0, 0.6, 0.2, 0.5, 0],
+        scale: [0, 1.2, 0.8, 1.3, 0],
+        y: [0, -15, -5, -25, -40],
+        x: [0, Math.random() * 10 - 5, Math.random() * 15 - 7],
       }}
       transition={{
         duration,
-        delay: delay * 0.25,
+        delay: delay * 0.2,
         repeat: Infinity,
         ease: "easeInOut",
       }}
@@ -86,23 +98,22 @@ const AmbientParticle = ({ delay, isMobile }: { delay: number; isMobile: boolean
   );
 };
 
-// Nebula / fog layer
 const NebulaLayer = () => (
   <>
     <motion.div
       className="absolute inset-0 pointer-events-none"
       style={{
-        background: "radial-gradient(ellipse 80% 50% at 30% 50%, hsl(212 100% 50% / 0.03), transparent)",
+        background: "radial-gradient(ellipse 80% 50% at 30% 50%, hsl(212 100% 50% / 0.04), transparent)",
       }}
-      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      animate={{ opacity: [0.4, 0.7, 0.4] }}
       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.div
       className="absolute inset-0 pointer-events-none"
       style={{
-        background: "radial-gradient(ellipse 60% 40% at 70% 60%, hsl(24 100% 50% / 0.02), transparent)",
+        background: "radial-gradient(ellipse 60% 40% at 70% 60%, hsl(24 100% 50% / 0.03), transparent)",
       }}
-      animate={{ opacity: [0.2, 0.5, 0.2] }}
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
     />
   </>
@@ -110,7 +121,6 @@ const NebulaLayer = () => (
 
 export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
   const [phase, setPhase] = useState<"scatter" | "scan" | "assemble" | "glow" | "exit">("scatter");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const hasExited = useRef(false);
@@ -124,28 +134,30 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
   }, [onComplete]);
 
   useEffect(() => {
-    const mobile = window.innerWidth < 600;
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+    const mobile = screenW < 600;
     setIsMobile(mobile);
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    // Fewer particles on mobile for performance, but bigger
+    const particleCount = mobile ? 200 : 350;
+    const targets = generateLetterTargets(screenW, screenH, particleCount);
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const targets = generateLetterTargets(canvas);
-    const ctx = canvas.getContext("2d");
-    if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (targets.length === 0) {
+      // Fallback: if canvas text detection fails, skip intro
+      triggerExit();
+      return;
+    }
 
     const generated: Particle[] = targets.map((t, i) => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
+      x: Math.random() * screenW,
+      y: Math.random() * screenH,
       targetX: t.x,
       targetY: t.y,
-      size: 1 + Math.random() * 2.5,
-      delay: i * 0.006,
+      size: mobile ? 2 + Math.random() * 2.5 : 1.5 + Math.random() * 2.5,
+      delay: i * (mobile ? 0.004 : 0.006),
       orbit: Math.random() * Math.PI * 2,
-      brightness: 40 + Math.random() * 30,
+      brightness: 45 + Math.random() * 30,
     }));
     setParticles(generated);
 
@@ -157,7 +169,7 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
     return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [triggerExit]);
 
-  const ambientCount = isMobile ? 25 : 50;
+  const ambientCount = isMobile ? 20 : 50;
 
   return (
     <AnimatePresence>
@@ -169,23 +181,18 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           onClick={triggerExit}
         >
-          <canvas ref={canvasRef} className="absolute inset-0 opacity-0 pointer-events-none" />
-
-          {/* Nebula atmosphere */}
           <NebulaLayer />
 
-          {/* Ambient floating particles */}
           {Array.from({ length: ambientCount }).map((_, i) => (
             <AmbientParticle key={`ambient-${i}`} delay={i} isMobile={isMobile} />
           ))}
 
-          {/* Scan lines */}
           {phase === "scan" && (
             <>
               <motion.div
                 className="absolute top-0 bottom-0"
                 style={{
-                  width: 2,
+                  width: isMobile ? 3 : 2,
                   background: "linear-gradient(180deg, transparent 10%, hsl(212 100% 60%) 50%, transparent 90%)",
                   boxShadow: "0 0 40px 8px hsl(212 100% 50% / 0.4), 0 0 100px hsl(212 100% 50% / 0.15)",
                 }}
@@ -203,7 +210,6 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
                 animate={{ left: "105%" }}
                 transition={{ duration: 1, ease: [0.4, 0, 0.2, 1], delay: 0.12 }}
               />
-              {/* Horizontal scanline */}
               <motion.div
                 className="absolute left-0 right-0 h-px"
                 style={{
@@ -216,8 +222,8 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
             </>
           )}
 
-          {/* Main particles */}
-          <div className="absolute inset-0">
+          {/* Main particles using will-change for GPU acceleration */}
+          <div className="absolute inset-0" style={{ willChange: "transform" }}>
             {particles.map((p, i) => {
               const isGlow = phase === "glow";
               const isAssembled = phase === "assemble" || isGlow;
@@ -228,14 +234,15 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
                   style={{
                     width: p.size,
                     height: p.size,
+                    willChange: "transform, opacity",
                     background: isGlow
                       ? `hsl(24 100% ${p.brightness}%)`
                       : `hsl(212 100% ${p.brightness}%)`,
                     boxShadow: isGlow
-                      ? `0 0 ${p.size * 5}px hsl(24 100% 50% / 0.6), 0 0 ${p.size * 12}px hsl(24 100% 50% / 0.2)`
+                      ? `0 0 ${p.size * 4}px hsl(24 100% 50% / 0.7), 0 0 ${p.size * 10}px hsl(24 100% 50% / 0.25)`
                       : isAssembled
-                      ? `0 0 ${p.size * 3}px hsl(212 100% 60% / 0.5)`
-                      : `0 0 ${p.size}px hsl(212 100% 60% / 0.3)`,
+                      ? `0 0 ${p.size * 3}px hsl(212 100% 60% / 0.6)`
+                      : `0 0 ${p.size * 1.5}px hsl(212 100% 60% / 0.4)`,
                   }}
                   initial={{ x: p.x, y: p.y, opacity: 0 }}
                   animate={
@@ -243,9 +250,9 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
                       ? { x: p.x, y: p.y, opacity: 0 }
                       : phase === "scan"
                       ? {
-                          x: p.x + Math.cos(p.orbit) * 40,
-                          y: p.y + Math.sin(p.orbit) * 40,
-                          opacity: [0, 0.3, 0.15],
+                          x: p.x + Math.cos(p.orbit) * (isMobile ? 20 : 40),
+                          y: p.y + Math.sin(p.orbit) * (isMobile ? 20 : 40),
+                          opacity: [0, 0.4, 0.2],
                         }
                       : { x: p.targetX, y: p.targetY, opacity: 1 }
                   }
@@ -259,16 +266,15 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
             })}
           </div>
 
-          {/* Glow burst */}
           {phase === "glow" && (
             <motion.div
               className="absolute pointer-events-none"
               style={{
-                width: "70%",
-                height: "35%",
-                background: "radial-gradient(ellipse, hsl(24 100% 50% / 0.06) 0%, hsl(24 100% 50% / 0.02) 40%, transparent 70%)",
-                top: "32%",
-                left: "15%",
+                width: "80%",
+                height: "40%",
+                background: "radial-gradient(ellipse, hsl(24 100% 50% / 0.08) 0%, hsl(24 100% 50% / 0.03) 40%, transparent 70%)",
+                top: "30%",
+                left: "10%",
               }}
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1.15 }}
@@ -276,21 +282,19 @@ export const IntroAnimation = ({ onComplete }: { onComplete: () => void }) => {
             />
           )}
 
-          {/* Subtitle */}
           <motion.div
             className="absolute bottom-[18%] md:bottom-[22%] left-0 right-0 text-center px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={phase === "glow" ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-[9px] md:text-xs tracking-[0.4em] md:tracking-[0.5em] uppercase text-muted-foreground font-light">
+            <p className="text-[10px] md:text-xs tracking-[0.35em] md:tracking-[0.5em] uppercase text-muted-foreground font-light">
               Ashbin Shaji · Creative Technologist
             </p>
           </motion.div>
 
-          {/* Skip hint */}
           <motion.p
-            className="absolute bottom-6 md:bottom-8 left-0 right-0 text-center text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-muted-foreground/30"
+            className="absolute bottom-6 md:bottom-8 left-0 right-0 text-center text-[10px] md:text-[10px] tracking-[0.3em] uppercase text-muted-foreground/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
