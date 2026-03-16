@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { GlassCard } from "./GlassCard";
 
 const pillars = [
   { num: "01", title: "Innovation First", desc: "Pushing boundaries of what's possible through technology and relentless creativity." },
@@ -32,19 +33,15 @@ export const Philosophy = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-              className="bg-background p-8 space-y-4 group hover:bg-card transition-colors duration-500"
-            >
-              <span className="text-xs font-orbitron text-accent/40 group-hover:text-accent transition-colors duration-500">{p.num}</span>
-              <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-            </motion.div>
+            <GlassCard key={p.title} delay={i * 0.1} parallaxStrength={15 + i * 5} glowColor={i % 2 === 0 ? "accent" : "primary"}>
+              <div className="space-y-4">
+                <span className="text-xs font-orbitron text-accent/40 group-hover:text-accent transition-colors duration-500">{p.num}</span>
+                <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+              </div>
+            </GlassCard>
           ))}
         </div>
       </div>

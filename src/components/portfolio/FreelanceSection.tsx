@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { GlassCard } from "./GlassCard";
 
 const services = [
   { title: "Premium Websites", desc: "Bespoke web experiences with cinematic design and cutting-edge technology." },
@@ -31,18 +32,12 @@ export const FreelanceSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-px bg-border">
+        <div className="grid md:grid-cols-2 gap-4">
           {services.map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-background p-8 md:p-10 group hover:bg-card transition-colors duration-500"
-            >
+            <GlassCard key={service.title} delay={i * 0.1} parallaxStrength={20} glowColor={i % 2 === 0 ? "primary" : "accent"}>
               <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors duration-500">{service.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{service.desc}</p>
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
       </div>

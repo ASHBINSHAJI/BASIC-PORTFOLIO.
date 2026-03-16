@@ -14,6 +14,7 @@ import { BuyMeATea } from "@/components/portfolio/BuyMeATea";
 import { FutureVision } from "@/components/portfolio/FutureVision";
 import { Contact } from "@/components/portfolio/Contact";
 import { IntroAnimation } from "@/components/portfolio/IntroAnimation";
+import { EnergyTrails } from "@/components/portfolio/EnergyTrails";
 import { playClickSound } from "@/lib/sounds";
 
 const Index = () => {
@@ -42,6 +43,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <EnergyTrails />
       <Navbar />
       <Hero />
       <Philosophy />

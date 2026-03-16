@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { GlassCard } from "./GlassCard";
 
 const skills = [
   { title: "Web Development", desc: "React, TypeScript, Full-Stack" },
@@ -34,20 +35,14 @@ export const Skills = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-border">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {skills.map((skill, i) => (
-            <motion.div
-              key={skill.title}
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="bg-background p-6 group hover:bg-card transition-colors duration-500 blue-line-glow"
-            >
+            <GlassCard key={skill.title} delay={i * 0.04} parallaxStrength={10} glowColor={i % 3 === 0 ? "primary" : "accent"}>
               <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-500">
                 {skill.title}
               </h3>
               <p className="text-xs text-muted-foreground">{skill.desc}</p>
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
       </div>
