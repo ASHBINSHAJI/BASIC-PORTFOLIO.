@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { GlassCard } from "./GlassCard";
 
 const experiments = [
   { title: "AI System Blueprints", desc: "Conceptual designs for next-generation AI-powered platforms and intelligent interfaces." },
@@ -31,23 +32,19 @@ export const InnovationLab = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-px">
+        <div className="space-y-3">
           {experiments.map((exp, i) => (
-            <motion.div
-              key={exp.title}
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="dark-card p-8 flex items-start gap-6 group"
-            >
-              <span className="text-xs font-orbitron text-accent/30 group-hover:text-accent transition-colors duration-500 mt-1 shrink-0">
-                0{i + 1}
-              </span>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-500">{exp.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-2">{exp.desc}</p>
+            <GlassCard key={exp.title} delay={i * 0.1} parallaxStrength={15} glowColor={i % 2 === 0 ? "accent" : "primary"}>
+              <div className="flex items-start gap-6">
+                <span className="text-xs font-orbitron text-accent/30 group-hover:text-accent transition-colors duration-500 mt-1 shrink-0">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-500">{exp.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-2">{exp.desc}</p>
+                </div>
               </div>
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
       </div>

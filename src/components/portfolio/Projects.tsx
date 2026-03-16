@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { GlassCard } from "./GlassCard";
 
 const projects = [
   {
@@ -7,28 +8,28 @@ const projects = [
     subtitle: "Smart Home Ecosystem",
     desc: "A complete smart home ecosystem with AI-powered modules for kitchen, rooms, bathroom, security locks, and voice assistant.",
     tags: ["AI Kitchen", "Smart Room", "Smart Lock", "Voice Assistant", "Robotics"],
-    accent: "primary",
+    accent: "primary" as const,
   },
   {
     title: "AI Ecommerce Platform",
     subtitle: "Next-Gen Shopping Experience",
     desc: "An AI-powered ecommerce concept featuring intelligent product discovery, smart cart systems, secure payments, AI reviews, and satisfaction analytics.",
     tags: ["AI Discovery", "Smart Cart", "Payments", "Analytics", "Animation UI"],
-    accent: "accent",
+    accent: "accent" as const,
   },
   {
     title: "Air Games Studio",
     subtitle: "Cinematic Game Development",
     desc: "A game development initiative focused on cinematic 3D real-world inspired games with high-end visual design and immersive storytelling.",
     tags: ["3D Games", "Cinematic Stories", "Unreal Engine"],
-    accent: "primary",
+    accent: "primary" as const,
   },
   {
     title: "Aironit",
     subtitle: "Hardware & Robotics",
     desc: "Advanced hardware engineering and robotics — intelligent physical systems with embedded AI, sensor networks, and precision mechanics.",
     tags: ["Embedded Systems", "Robotics", "Hardware Design"],
-    accent: "accent",
+    accent: "accent" as const,
   },
 ];
 
@@ -55,26 +56,10 @@ export const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-px">
+        <div className="space-y-4">
           {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="dark-card p-8 md:p-12 group relative overflow-hidden"
-            >
-              {/* Hover glow */}
-              <div
-                className={`absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none ${
-                  project.accent === "primary"
-                    ? "bg-primary/[0.03]"
-                    : "bg-accent/[0.03]"
-                }`}
-                style={{ filter: "blur(60px)" }}
-              />
-
-              <div className="relative z-10 space-y-5">
+            <GlassCard key={project.title} delay={i * 0.1} parallaxStrength={20} glowColor={project.accent}>
+              <div className="space-y-5">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div>
                     <h3 className={`text-2xl md:text-3xl font-bold ${
@@ -85,9 +70,7 @@ export const Projects = () => {
                     <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">{project.subtitle}</p>
                   </div>
                 </div>
-
                 <p className="text-muted-foreground leading-relaxed max-w-3xl text-sm">{project.desc}</p>
-
                 <div className="flex flex-wrap gap-2 pt-2">
                   {project.tags.map((tag) => (
                     <span
@@ -99,7 +82,7 @@ export const Projects = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
       </div>
