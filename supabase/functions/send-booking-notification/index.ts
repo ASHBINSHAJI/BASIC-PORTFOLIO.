@@ -16,15 +16,86 @@ interface BookingNotificationRequest {
   message?: string;
 }
 
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return String(text ?? "").replace(/[&<>"']/g, (m) => map[m]);
+}
+
+// Simple in-memory IP rate limiter (per edge instance)
+const RATE_LIMIT = 5;
+const TIME_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const rateLimiter = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (rateLimiter.get(ip) || []).filter((t) => now - t < TIME_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    rateLimiter.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  rateLimiter.set(ip, recent);
+  return false;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  try {
-    const { name, phoneNumber, email, bookingDate, message }: BookingNotificationRequest = await req.json();
+  const errorId = crypto.randomUUID();
 
-    console.log("Sending booking notification for:", { name, email, bookingDate });
+  try {
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+      req.headers.get("cf-connecting-ip") ||
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again later." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const body = (await req.json()) as BookingNotificationRequest;
+
+    // Basic input validation
+    const name = String(body.name ?? "").trim().slice(0, 100);
+    const phoneNumber = String(body.phoneNumber ?? "").trim().slice(0, 20);
+    const email = String(body.email ?? "").trim().slice(0, 255);
+    const bookingDate = String(body.bookingDate ?? "").trim().slice(0, 100);
+    const message = body.message ? String(body.message).trim().slice(0, 1000) : "";
+
+    if (!name || !phoneNumber || !email || !bookingDate) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email format." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    console.log(`[${errorId}] Sending booking notification`);
+
+    const safe = {
+      name: escapeHtml(name),
+      phoneNumber: escapeHtml(phoneNumber),
+      email: escapeHtml(email),
+      bookingDate: escapeHtml(bookingDate),
+      message: escapeHtml(message),
+    };
 
     // Send notification to admin
     const adminEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -36,16 +107,16 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Portfolio <onboarding@resend.dev>",
         to: ["appuminnu500@gmail.com"],
-        subject: `New Booking Request from ${name}`,
+        subject: `New Booking Request from ${name.replace(/[\r\n]/g, " ")}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #333;">New Booking Request</h2>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Phone Number:</strong> ${phoneNumber}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Booking Date:</strong> ${bookingDate}</p>
-              ${message ? `<p><strong>Message:</strong> ${message}</p>` : ""}
+              <p><strong>Name:</strong> ${safe.name}</p>
+              <p><strong>Phone Number:</strong> ${safe.phoneNumber}</p>
+              <p><strong>Email:</strong> ${safe.email}</p>
+              <p><strong>Booking Date:</strong> ${safe.bookingDate}</p>
+              ${safe.message ? `<p><strong>Message:</strong> ${safe.message}</p>` : ""}
             </div>
             <p style="color: #666; font-size: 14px;">
               This is an automated notification from your portfolio website.
@@ -54,9 +125,6 @@ const handler = async (req: Request): Promise<Response> => {
         `,
       }),
     });
-
-    const adminEmailData = await adminEmailResponse.json();
-    console.log("Admin email sent:", adminEmailData);
 
     // Send confirmation to user
     const userEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -71,15 +139,15 @@ const handler = async (req: Request): Promise<Response> => {
         subject: "Booking Confirmation - We received your request!",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #333;">Thank you for your booking request, ${name}!</h2>
-            <p>We have received your booking request for <strong>${bookingDate}</strong>.</p>
+            <h2 style="color: #333;">Thank you for your booking request, ${safe.name}!</h2>
+            <p>We have received your booking request for <strong>${safe.bookingDate}</strong>.</p>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="margin-top: 0;">Booking Details:</h3>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Phone Number:</strong> ${phoneNumber}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Date:</strong> ${bookingDate}</p>
-              ${message ? `<p><strong>Your Message:</strong> ${message}</p>` : ""}
+              <p><strong>Name:</strong> ${safe.name}</p>
+              <p><strong>Phone Number:</strong> ${safe.phoneNumber}</p>
+              <p><strong>Email:</strong> ${safe.email}</p>
+              <p><strong>Date:</strong> ${safe.bookingDate}</p>
+              ${safe.message ? `<p><strong>Your Message:</strong> ${safe.message}</p>` : ""}
             </div>
             <p>I'll get back to you as soon as possible to confirm your booking.</p>
             <p style="color: #666; font-size: 14px; margin-top: 30px;">
@@ -91,31 +159,33 @@ const handler = async (req: Request): Promise<Response> => {
       }),
     });
 
-    const userEmailData = await userEmailResponse.json();
-    console.log("User confirmation email sent:", userEmailData);
+    if (!adminEmailResponse.ok || !userEmailResponse.ok) {
+      console.error(
+        `[${errorId}] Email send failed`,
+        adminEmailResponse.status,
+        userEmailResponse.status
+      );
+      return new Response(
+        JSON.stringify({
+          error: "Unable to send notification at this time. Please try again later.",
+          errorId,
+        }),
+        { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  } catch (error) {
+    console.error(`[${errorId}] Error in send-booking-notification:`, error);
     return new Response(
-      JSON.stringify({ 
-        success: true,
-        adminEmail: adminEmailData,
-        userEmail: userEmailData 
+      JSON.stringify({
+        error: "Unable to process booking notification. Please try again later.",
+        errorId,
       }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          ...corsHeaders,
-        },
-      }
-    );
-  } catch (error: any) {
-    console.error("Error in send-booking-notification function:", error);
-    return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };
