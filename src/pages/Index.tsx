@@ -7,6 +7,7 @@ import { Projects } from "@/components/portfolio/Projects";
 import { UpcomingProjects } from "@/components/portfolio/UpcomingProjects";
 import { GameVision } from "@/components/portfolio/GameVision";
 import { AnimationShowcase } from "@/components/portfolio/AnimationShowcase";
+import { HolographicShowcase } from "@/components/portfolio/HolographicShowcase";
 import { InnovationLab } from "@/components/portfolio/InnovationLab";
 import { FreelanceSection } from "@/components/portfolio/FreelanceSection";
 import { Availability } from "@/components/portfolio/Availability";
@@ -52,6 +53,7 @@ const Index = () => {
       <UpcomingProjects />
       <GameVision />
       <AnimationShowcase />
+      <HolographicShowcase />
       <InnovationLab />
       <FreelanceSection />
       <Availability />
