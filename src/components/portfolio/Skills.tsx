@@ -3,17 +3,14 @@ import { useRef } from "react";
 import { GlassCard } from "./GlassCard";
 
 const skills = [
+  { title: "Automation", desc: "Workflows & AI Agents" },
   { title: "Web Development", desc: "React, TypeScript, Full-Stack" },
-  { title: "UI/UX Design", desc: "Cinematic Interfaces" },
-  { title: "Product Architecture", desc: "Systems & Blueprints" },
+  { title: "App Development", desc: "Cross-Platform Mobile Apps" },
   { title: "Prompt Engineering", desc: "AI Automation" },
-  { title: "Animation & Motion", desc: "2D, 3D, Motion Graphics" },
-  { title: "System Design", desc: "Complex Architectures" },
-  { title: "Hardware Engineering", desc: "Circuits & Embedded" },
-  { title: "Robotics", desc: "Sensors & Intelligence" },
-  { title: "Editing & Direction", desc: "Film & Visual Media" },
-  { title: "Game Development", desc: "Cinematic 3D Worlds" },
+  { title: "Backend & APIs", desc: "Databases, Auth, Integrations" },
+  { title: "System Design", desc: "Scalable Architectures" },
 ];
+
 
 export const Skills = () => {
   const ref = useRef(null);
