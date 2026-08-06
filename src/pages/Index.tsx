@@ -3,7 +3,6 @@ import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { Philosophy } from "@/components/portfolio/Philosophy";
 import { Skills } from "@/components/portfolio/Skills";
-import { AnimationShowcase } from "@/components/portfolio/AnimationShowcase";
 import { HolographicShowcase } from "@/components/portfolio/HolographicShowcase";
 import { InnovationLab } from "@/components/portfolio/InnovationLab";
 import { FreelanceSection } from "@/components/portfolio/FreelanceSection";
@@ -46,7 +45,6 @@ const Index = () => {
       <Hero />
       <Philosophy />
       <Skills />
-      <AnimationShowcase />
       <HolographicShowcase />
       <InnovationLab />
       <FreelanceSection />
