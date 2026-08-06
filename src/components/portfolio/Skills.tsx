@@ -3,17 +3,14 @@ import { useRef } from "react";
 import { GlassCard } from "./GlassCard";
 
 const skills = [
+  { title: "Automation", desc: "Workflows & AI Agents" },
   { title: "Web Development", desc: "React, TypeScript, Full-Stack" },
-  { title: "UI/UX Design", desc: "Cinematic Interfaces" },
-  { title: "Product Architecture", desc: "Systems & Blueprints" },
+  { title: "App Development", desc: "Cross-Platform Mobile Apps" },
   { title: "Prompt Engineering", desc: "AI Automation" },
-  { title: "Animation & Motion", desc: "2D, 3D, Motion Graphics" },
-  { title: "System Design", desc: "Complex Architectures" },
-  { title: "Hardware Engineering", desc: "Circuits & Embedded" },
-  { title: "Robotics", desc: "Sensors & Intelligence" },
-  { title: "Editing & Direction", desc: "Film & Visual Media" },
-  { title: "Game Development", desc: "Cinematic 3D Worlds" },
+  { title: "Backend & APIs", desc: "Databases, Auth, Integrations" },
+  { title: "System Design", desc: "Scalable Architectures" },
 ];
+
 
 export const Skills = () => {
   const ref = useRef(null);
@@ -35,7 +32,7 @@ export const Skills = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {skills.map((skill, i) => (
             <GlassCard key={skill.title} delay={i * 0.04} parallaxStrength={10} glowColor={i % 3 === 0 ? "primary" : "accent"}>
               <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-500">
