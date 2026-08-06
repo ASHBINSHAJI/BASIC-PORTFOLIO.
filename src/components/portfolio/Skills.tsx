@@ -32,7 +32,7 @@ export const Skills = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {skills.map((skill, i) => (
             <GlassCard key={skill.title} delay={i * 0.04} parallaxStrength={10} glowColor={i % 3 === 0 ? "primary" : "accent"}>
               <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-500">

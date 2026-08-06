@@ -4,7 +4,6 @@ import { Hero } from "@/components/portfolio/Hero";
 import { Philosophy } from "@/components/portfolio/Philosophy";
 import { Skills } from "@/components/portfolio/Skills";
 import { Projects } from "@/components/portfolio/Projects";
-import { UpcomingProjects } from "@/components/portfolio/UpcomingProjects";
 import { GameVision } from "@/components/portfolio/GameVision";
 import { AnimationShowcase } from "@/components/portfolio/AnimationShowcase";
 import { HolographicShowcase } from "@/components/portfolio/HolographicShowcase";
@@ -50,7 +49,6 @@ const Index = () => {
       <Philosophy />
       <Skills />
       <Projects />
-      <UpcomingProjects />
       <GameVision />
       <AnimationShowcase />
       <HolographicShowcase />
